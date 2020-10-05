@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Quest</string>
+    <string name="log_google">Login with Google</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="fullname_hint">Full Name</string>
+    <string name="lbGender"> Gender</string>
+    <string name="lbrbMale">Male</string>
+    <string name="lbrbFemale">Female</string>
+    <string name="agreement">I Agree with the terms and conditions of the Quest Group</string>
 </resources>
