@@ -5,6 +5,7 @@
     <string name="register">Register</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
+    <string name="repassword_hint">Retype Password</string>
     <string name="fullname_hint">Full Name</string>
     <string name="lbGender"> Gender</string>
     <string name="lbrbMale">Male</string>

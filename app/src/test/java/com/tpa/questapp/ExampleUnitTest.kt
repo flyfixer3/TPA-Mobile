@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.tpa.questapp
 
 import org.junit.Test
 
