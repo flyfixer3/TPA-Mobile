@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.tpa.questapp.RegisterActivtity"></activity>
-        <activity android:name="com.tpa.questapp.LoginActvity" />
-        <activity android:name="com.tpa.questapp.MainActivity">
+        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".RegisterActivtity" />
+        <activity android:name=".LoginActvity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
