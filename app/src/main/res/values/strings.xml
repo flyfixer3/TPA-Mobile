@@ -7,8 +7,25 @@
     <string name="password_hint">Password</string>
     <string name="repassword_hint">Retype Password</string>
     <string name="fullname_hint">Full Name</string>
-    <string name="lbGender"> Gender</string>
+    <string name="lbGender">Gender</string>
     <string name="lbrbMale">Male</string>
     <string name="lbrbFemale">Female</string>
     <string name="agreement">I Agree with the terms and conditions of the Quest Group</string>
+    <string name="job_hint">Job</string>
+    <string name="location_hint">Location</string>
+    <string-array name="majors_array">
+        <item>Choose Major</item>
+        <item>Computer Science</item>
+        <item>Information Systems</item>
+        <item>Accounting</item>
+        <item>Management</item>
+    </string-array>
+
+    <string-array name="locations_array">
+        <item>Choose Location</item>
+        <item>Indonesia</item>
+        <item>Amerika Serikat</item>
+        <item>Inggris</item>
+        <item>Australia</item>
+    </string-array>
 </resources>
