@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "275969545189",
+    "firebase_url": "https://fir-authquestapp.firebaseio.com",
+    "project_id": "fir-authquestapp",
+    "storage_bucket": "fir-authquestapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275969545189:android:2765f1eadff49c71b6d50c",
+        "android_client_info": {
+          "package_name": "com.tpa.questapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275969545189-pu6vmk891l7dbleut7ppoj9d15neff75.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tpa.questapp",
+            "certificate_hash": "70392d64169fbc9af531b474c01406b42cbfd718"
+          }
+        },
+        {
+          "client_id": "275969545189-79uqsra6bemdrnjlk1ti6phm3onusagt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tpa.questapp",
+            "certificate_hash": "0b17209dedbf9068ab4d08d189f76f581d77c088"
+          }
+        },
+        {
+          "client_id": "275969545189-9s2gh90kr14glk00gl081299pqoi9frc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtTY5xZUmVafuk4G__NHp2dtkWcXmVduE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275969545189-9s2gh90kr14glk00gl081299pqoi9frc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

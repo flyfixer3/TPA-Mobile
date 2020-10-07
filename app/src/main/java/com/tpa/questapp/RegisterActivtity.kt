@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.RadioButton
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -69,11 +68,11 @@ class RegisterActivtity : AppCompatActivity() {
 
 
     private fun onAuthSuccess(user: FirebaseUser) {
-        var id: Int = genderRadioGroup.checkedRadioButtonId
+        val id: Int = genderRadioGroup.checkedRadioButtonId
         val radio: RadioButton = findViewById(id)
         writeNewUser(user.uid, fullNameField!!.text.toString(), radio.text.toString() , jobField!!.text.toString(), locationField.text.toString(), majorSpinner.getSelectedItem().toString())
 
-        // Go to MainActivity
+        // Go to LoginActivity
         startActivity(Intent(this@RegisterActivtity, LoginActvity::class.java))
         finish()
     }
@@ -82,6 +81,7 @@ class RegisterActivtity : AppCompatActivity() {
         val user = User(fullname, gender, job, location, major)
         database.child("users").child(userId).setValue(user)
     }
+
     private fun loadMajor() {
         ArrayAdapter.createFromResource(
             this,

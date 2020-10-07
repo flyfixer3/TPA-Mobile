@@ -3,20 +3,24 @@ package com.tpa.questapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var auth: FirebaseAuth
+
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +36,9 @@ class MainActivity : AppCompatActivity() {
             .build()
         auth = Firebase.auth
         googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        //register with google
+        database = Firebase.database.reference
     }
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
@@ -51,14 +58,18 @@ class MainActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
+
+                    //insert user data to database
+                    writeNewUser(user?.uid.toString(), user?.displayName.toString())
                     val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
-                    // ...
+                    Toast.makeText(getApplicationContext(),"Sign In with Google failed",Toast.LENGTH_SHORT).show();
                 }
             }
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -90,6 +101,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivtity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun writeNewUser(userId: String, fullname: String) {
+        val user = User(fullname)
+        database.child("users").child(userId).setValue(user)
     }
 
     companion object {
