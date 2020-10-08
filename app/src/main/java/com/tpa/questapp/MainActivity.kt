@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
+//        val currentUser = auth.currentUser
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
                     //insert user data to database
                     writeNewUser(user?.uid.toString(), user?.displayName.toString())
-                    val intent = Intent(this, HomeActivity::class.java)
+                    val intent = Intent(this, RegisterDetailActivity::class.java)
                     startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.

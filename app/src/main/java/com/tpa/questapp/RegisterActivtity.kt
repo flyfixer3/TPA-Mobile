@@ -28,7 +28,6 @@ class RegisterActivtity : AppCompatActivity() {
     }
 
     private fun init() {
-        loadMajor()
         registerButton.setOnClickListener {
             val email = emailField!!.text.toString().trim { it <= ' ' }
             val password = passwordField!!.text.toString().trim { it <= ' ' }
@@ -68,30 +67,16 @@ class RegisterActivtity : AppCompatActivity() {
 
 
     private fun onAuthSuccess(user: FirebaseUser) {
-        val id: Int = genderRadioGroup.checkedRadioButtonId
-        val radio: RadioButton = findViewById(id)
-        writeNewUser(user.uid, fullNameField!!.text.toString(), radio.text.toString() , jobField!!.text.toString(), locationField.text.toString(), majorSpinner.getSelectedItem().toString())
+        writeNewUser(user.uid, fullNameField!!.text.toString())
 
-        // Go to LoginActivity
+//         Go to LoginActivity
         startActivity(Intent(this@RegisterActivtity, LoginActvity::class.java))
         finish()
     }
 
-    private fun writeNewUser(userId: String, fullname: String, gender: String, job: String, location: String, major: String) {
-        val user = User(fullname, gender, job, location, major)
+    private fun writeNewUser(userId: String, fullname: String) {
+        val user = User(fullname)
         database.child("users").child(userId).setValue(user)
     }
 
-    private fun loadMajor() {
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.majors_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            majorSpinner.adapter = adapter
-        }
-    }
 }

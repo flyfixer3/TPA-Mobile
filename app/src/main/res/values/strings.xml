@@ -13,19 +13,65 @@
     <string name="agreement">I Agree with the terms and conditions of the Quest Group</string>
     <string name="job_hint">Job</string>
     <string name="location_hint">Location</string>
+    <string name="submit">Submit</string>
+
+
     <string-array name="majors_array">
         <item>Choose Major</item>
+        <item>Accounting</item>
         <item>Computer Science</item>
         <item>Information Systems</item>
-        <item>Accounting</item>
         <item>Management</item>
     </string-array>
 
-    <string-array name="locations_array">
-        <item>Choose Location</item>
-        <item>Indonesia</item>
-        <item>Amerika Serikat</item>
-        <item>Inggris</item>
-        <item>Australia</item>
+    <string-array name="ComputerScience">
+        <item>Algorithm</item>
+        <item>Calculus</item>
+        <item>Artificial Intelligence</item>
+        <item>Python</item>
+        <item>Mobile</item>
+        <item>Web Programming</item>
+        <item>Virtual Intelligence</item>
+        <item>Laravel</item>
+        <item>Network</item>
+        <item>Technology</item>
+    </string-array>
+
+    <string-array name="InformationSystems">
+        <item>Business Information</item>
+        <item>Statistic</item>
+        <item>Management System</item>
+        <item>Information</item>
+        <item>Technology</item>
+        <item>Web</item>
+        <item>Mobile</item>
+        <item>Object Oriented Programming</item>
+        <item>Java</item>
+    </string-array>
+
+    <string-array name="Accounting">
+        <item>Financial</item>
+        <item>Tax</item>
+        <item>Audit</item>
+        <item>Accounting Information Systems</item>
+        <item>Fiduciary</item>
+        <item>Budgeting</item>
+        <item>Ledger</item>
+        <item>Sales</item>
+        <item>Report</item>
+        <item>Cash Flow</item>
+    </string-array>
+
+    <string-array name="Management">
+        <item>Stock Exchange</item>
+        <item>Marketing</item>
+        <item>Business</item>
+        <item>Analysis</item>
+        <item>Capital</item>
+        <item>Bull</item>
+        <item>Trade</item>
+        <item>Costing</item>
+        <item>Report</item>
+        <item>Strategy</item>
     </string-array>
 </resources>
