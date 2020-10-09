@@ -1,6 +1,9 @@
 package com.tpa.questapp
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Color.BLACK
+import android.graphics.Color.WHITE
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.SparseBooleanArray
@@ -15,7 +18,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_register_detail.*
-import kotlinx.android.synthetic.main.activity_register_detail.submitButton
 import kotlinx.android.synthetic.main.activity_register_major.*
 
 class RegisterMajor : AppCompatActivity() {
@@ -38,24 +40,43 @@ class RegisterMajor : AppCompatActivity() {
             }
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if(majorSpinner.getSelectedItem().toString() == "Computer Science"){
+                if(majorSpinner.selectedItem.toString() == "Computer Science"){
                     loadTopicCS()
-                }else if(majorSpinner.getSelectedItem().toString() == "Information Systems"){
+                }else if(majorSpinner.selectedItem.toString() == "Information Systems"){
                     loadTopicIS()
-                }else if(majorSpinner.getSelectedItem().toString() == "Accounting"){
+                }else if(majorSpinner.selectedItem.toString() == "Accounting"){
                     loadTopicAC()
-                }else if(majorSpinner.getSelectedItem().toString() == "Management"){
+                }else if(majorSpinner.selectedItem.toString() == "Management"){
                     loadTopicMN()
                 }else{
                     topicListView.adapter = null
                 }
             }
         }
+        submitButton.isClickable = false
+        submitButton.isEnabled = false
+        submitButton.setBackgroundColor(Color.parseColor("#FFFFFF"))
+        topicListView.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                var checked: Int = 0
+                submitButton.isClickable = false
+                submitButton.isEnabled = false
+                submitButton.setBackgroundColor(Color.parseColor("red"))
+                val sparseBooleanArray: SparseBooleanArray = topicListView.checkedItemPositions
 
+                for (i in 0 until topicListView.count) {
+                    if (sparseBooleanArray.get(i)) {
+                        checked += 1
+                    }
+                }
+                if (checked >= 3) {
+                    submitButton.isClickable = true
+                    submitButton.isEnabled = true
+                    submitButton.setBackgroundColor(Color.parseColor("black"))
+                }
+            }
         submitButton.setOnClickListener{
             val user = auth.currentUser
-            val id: Int = genderRadioGroup.checkedRadioButtonId
-            val radio: RadioButton = findViewById(id)
             val sparseBooleanArray: SparseBooleanArray = topicListView.checkedItemPositions
             val listTopic = mutableListOf<String>()
             for (i in 0 until topicListView.count) {
@@ -64,17 +85,16 @@ class RegisterMajor : AppCompatActivity() {
                 }
             }
             var registerUser = intent.getParcelableExtra<User>("User")
-            var pictProfile =
             writeNewUser(registerUser!!.pictProfile.toString(),
                 user!!.uid.toString(),
-            registerUser!!.fullname.toString(),
-            registerUser!!.gender.toString(),
-            registerUser!!.job.toString(),
-            registerUser!!.location.toString(),
+            registerUser.fullname.toString(),
+            registerUser.gender.toString(),
+            registerUser.job.toString(),
+            registerUser.location.toString(),
             majorSpinner.selectedItem.toString(),
             listTopic)
 
-            startActivity(intent)
+            startActivity(Intent(this, HomeActivity::class.java))
 
 
         }

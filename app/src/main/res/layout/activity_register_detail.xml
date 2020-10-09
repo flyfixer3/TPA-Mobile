@@ -25,7 +25,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/fullname_hint">
+            android:hint="@string/fullNameHint">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/fullNameField"
@@ -90,7 +90,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/submitButton"
+        android:id="@+id/nextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorPrimaryDark"

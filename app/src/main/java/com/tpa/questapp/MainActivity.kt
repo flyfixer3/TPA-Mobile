@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                             if(dataSnapshot.exists()){
                                 startActivity(Intent(this@MainActivity, HomeActivity::class.java))
                             }else{
-                                startActivity(Intent(this@MainActivity, RegisterMajor::class.java))
+                                startActivity(Intent(this@MainActivity, RegisterDetailActivity::class.java))
                             }
                         }
 
