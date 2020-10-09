@@ -22,7 +22,17 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
         android:orientation="vertical">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/fullname_hint">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fullNameField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,24 +87,6 @@
                 android:textSize="20sp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/majorSpinner"
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical"
-            android:paddingBottom="40dp">
-
-            <ListView
-                android:id="@+id/topicListView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
     </LinearLayout>
 
     <Button
@@ -102,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:text="@string/submit"
+        android:text="@string/next"
         android:textColor="@color/colorPrimary"
         android:layout_alignParentBottom="true"
         android:textSize="20sp"/>

@@ -11,8 +11,12 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -59,10 +63,23 @@ class MainActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
 
+                    val userListener = object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            // Get Post object and use the values to update the UI
+                            if(dataSnapshot.exists()){
+                                startActivity(Intent(this@MainActivity, HomeActivity::class.java))
+                            }else{
+                                startActivity(Intent(this@MainActivity, RegisterMajor::class.java))
+                            }
+                        }
+
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            // Getting Post failed, log a message
+                            // ...
+                        }
+                    }
                     //insert user data to database
-                    writeNewUser(user?.uid.toString(), user?.displayName.toString())
-                    val intent = Intent(this, RegisterDetailActivity::class.java)
-                    startActivity(intent)
+                    database.child("users").child(user!!.uid).addListenerForSingleValueEvent(userListener)
                 } else {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(getApplicationContext(),"Sign In with Google failed",Toast.LENGTH_SHORT).show();
@@ -103,10 +120,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun writeNewUser(userId: String, fullname: String) {
-        val user = User(fullname)
-        database.child("users").child(userId).setValue(user)
-    }
 
     companion object {
         private const val TAG = "LoginActivity"

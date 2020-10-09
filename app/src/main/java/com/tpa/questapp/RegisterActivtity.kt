@@ -32,7 +32,6 @@ class RegisterActivtity : AppCompatActivity() {
             val email = emailField!!.text.toString().trim { it <= ' ' }
             val password = passwordField!!.text.toString().trim { it <= ' ' }
             val repassword = re_passwordField!!.text.toString().trim { it <= ' ' }
-
             when {
                 TextUtils.isEmpty(email) -> emailField!!.error = "Enter email address!"
                 TextUtils.isEmpty(password) -> passwordField!!.error = "Enter password!"
@@ -67,16 +66,8 @@ class RegisterActivtity : AppCompatActivity() {
 
 
     private fun onAuthSuccess(user: FirebaseUser) {
-        writeNewUser(user.uid, fullNameField!!.text.toString())
-
-//         Go to LoginActivity
+        var registerUser: Boolean = true
         startActivity(Intent(this@RegisterActivtity, LoginActvity::class.java))
         finish()
     }
-
-    private fun writeNewUser(userId: String, fullname: String) {
-        val user = User(fullname)
-        database.child("users").child(userId).setValue(user)
-    }
-
 }

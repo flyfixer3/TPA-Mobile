@@ -15,12 +15,22 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login_actvity.*
+import kotlinx.android.synthetic.main.activity_login_actvity.emailField
+import kotlinx.android.synthetic.main.activity_login_actvity.passwordField
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_register_activtity.*
 
 class LoginActvity : AppCompatActivity() {
 
+    lateinit var auth:FirebaseAuth
+    private lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_actvity)
@@ -28,6 +38,8 @@ class LoginActvity : AppCompatActivity() {
     }
 
     private fun init() {
+        auth = Firebase.auth
+        database = Firebase.database.reference
         loginButton.setOnClickListener { view ->
             var email = emailField.getText().toString()
             var password = passwordField.getText().toString()
@@ -48,8 +60,34 @@ class LoginActvity : AppCompatActivity() {
                         else
                         {
                             Toast.makeText(this, "Succesfully Login", Toast.LENGTH_SHORT).show()
-                            val intent = Intent (this, HomeActivity::class.java)
-                            startActivity(intent)
+                            val user = auth.currentUser
+
+                            val userListener = object : ValueEventListener {
+                                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                    // Get Post object and use the values to update the UI
+                                    if (dataSnapshot.exists()) {
+                                        startActivity(
+                                            Intent(
+                                                this@LoginActvity,
+                                                HomeActivity::class.java
+                                            )
+                                        )
+                                    } else {
+                                        startActivity(
+                                            Intent(
+                                                this@LoginActvity,
+                                                RegisterDetailActivity::class.java
+                                            ).putExtra("isUserRegister",true)
+                                        )
+                                    }
+                                }
+
+                                override fun onCancelled(databaseError: DatabaseError) {
+                                    // Getting Post failed, log a message
+                                    // ...
+                                }
+                            }
+                            database.child("users").child(user!!.uid).addListenerForSingleValueEvent(userListener)
                         }
                     }
                     .addOnFailureListener{
