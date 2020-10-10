@@ -39,7 +39,7 @@
                 android:fontFamily="@font/playfairdisplay_semibold"
                 android:text="@string/app_name"
                 android:textColor="@color/colorAccent"
-                android:textSize="50sp" />
+                android:textSize="50sp"/>
 
             <Button
                 android:id="@+id/googleBtn"

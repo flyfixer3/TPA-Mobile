@@ -87,16 +87,14 @@
                 android:textSize="20sp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:text="@string/next"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"/>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:text="@string/next"
-        android:textColor="@color/colorPrimary"
-        android:layout_alignParentBottom="true"
-        android:textSize="20sp"/>
 
 </RelativeLayout>

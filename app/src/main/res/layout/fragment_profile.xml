@@ -1,14 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".homefragment.ProfileFragment">
+    tools:context=".homefragment.ProfileFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="profile" />
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:background="@drawable/backgroundprofile">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#CCFFFFFF"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="30dp"
+                android:src="@mipmap/profile" />
+
+            <TextView
+                android:id="@+id/fullNameTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/emailTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+
+<!--            <TextView-->
+<!--                android:id="@+id/logoutTxt"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="12dp"-->
+<!--                android:text="Logout"-->
+<!--                android:textColor="@color/colorPrimaryDark"-->
+<!--                android:textSize="18sp"/>-->
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:orientation="vertical"
+        android:padding="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/genderTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_assignment_ind_24"
+                android:textSize="18sp"
+                android:drawablePadding="15dp"/>
+
+            <TextView
+                android:id="@+id/locationTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                android:textSize="18sp"
+                android:layout_marginTop="5dp"
+                android:drawablePadding="15sp"/>
+
+            <TextView
+                android:id="@+id/educationTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_school_24"
+                android:textSize="18sp"
+                android:layout_marginTop="5dp"
+                android:drawablePadding="15dp"/>
+
+            <TextView
+                android:id="@+id/jobTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_work_24"
+                android:textSize="18sp"
+                android:layout_marginTop="5dp"
+                android:drawablePadding="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Insight"
+                android:textSize="18sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:drawablePadding="15dp"/>
+        </LinearLayout>
+
+        <GridLayout
+            android:id="@+id/GridLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1">
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0 Follower"
+                    android:textSize="18sp"
+                    android:layout_margin="5dp"
+                    android:textAllCaps="false"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1">
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="0 Following"
+                    android:textSize="18sp"
+                    android:layout_margin="5dp"
+                    android:textAllCaps="false"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1">
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0 Question"
+                    android:textSize="18sp"
+                    android:layout_margin="5dp"
+                    android:textAllCaps="false"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1">
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="0 Answer"
+                    android:textSize="18sp"
+                    android:layout_margin="5dp"
+                    android:textAllCaps="false"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0 Topic Interest"
+                    android:textSize="18sp"
+                    android:layout_margin="5dp"
+                    android:textAllCaps="false"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1">
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="0 Room Created"
+                    android:textSize="18sp"
+                    android:layout_margin="5dp"
+                    android:textAllCaps="false"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary" />
+            </LinearLayout>
+
+        </GridLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

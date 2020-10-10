@@ -16,7 +16,6 @@
     <string name="submit">Submit</string>
     <string name="next">Next</string>
 
-
     <string-array name="majors_array">
         <item>Choose Major</item>
         <item>Accounting</item>
@@ -75,4 +74,6 @@
         <item>Report</item>
         <item>Strategy</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

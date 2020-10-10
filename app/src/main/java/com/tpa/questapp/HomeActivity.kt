@@ -25,24 +25,24 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun init(){
-        replaceFragment(homeFragment)
-
+        replaceFragment(homeFragment, "Home")
         bottomNavigation.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.home -> replaceFragment(homeFragment)
-                R.id.answer -> replaceFragment(answerFragment)
-                R.id.discover -> replaceFragment(discoverFragment)
-                R.id.profile -> replaceFragment(profileFragment)
+                R.id.home -> replaceFragment(homeFragment, "Home")
+                R.id.answer -> replaceFragment(answerFragment, "Answer")
+                R.id.discover -> replaceFragment(discoverFragment, "Discover")
+                R.id.profile -> replaceFragment(profileFragment, "Profile")
             }
             true
         }
     }
 
-    private fun replaceFragment(fragment: Fragment){
+    private fun replaceFragment(fragment: Fragment, title: String){
         if(fragment != null){
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.homeContainer, fragment)
             transaction.commit()
+            headerMenu.setText(title)
         }
     }
 }
