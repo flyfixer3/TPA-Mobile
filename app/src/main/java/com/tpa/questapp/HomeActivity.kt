@@ -1,5 +1,6 @@
 package com.tpa.questapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -34,6 +35,14 @@ class HomeActivity : AppCompatActivity() {
                 R.id.profile -> replaceFragment(profileFragment, "Profile")
             }
             true
+        }
+        headerMenu.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@HomeActivity,
+                    SearchActivity::class.java
+                )
+            )
         }
     }
 
