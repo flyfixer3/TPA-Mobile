@@ -15,6 +15,11 @@
     <string name="location_hint">Location</string>
     <string name="submit">Submit</string>
     <string name="next">Next</string>
+    <string name="move_regis">Dont have any account? Register Now</string>
+    <string name="title_login">Sign in your account</string>
+    <string name="title_register">Sign up your account</string>
+    <string name="title_register_detail">Fill your Account</string>
+    <string name="title_register_major">Choose Major and 3 Topic you might like</string>
 
     <string-array name="majors_array">
         <item>Choose Major</item>

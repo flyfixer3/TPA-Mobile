@@ -13,7 +13,7 @@
         android:id="@+id/titleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose Major and 3 Topic you might like"
+        android:text=""
         android:textSize="20sp"/>
 
     <LinearLayout

@@ -32,10 +32,23 @@ class RegisterActivtity : AppCompatActivity() {
             val email = emailField!!.text.toString().trim { it <= ' ' }
             val password = passwordField!!.text.toString().trim { it <= ' ' }
             val repassword = re_passwordField!!.text.toString().trim { it <= ' ' }
+            var idxAt = email.indexOf('@')
+            var alpa = 0
+            var num = 0
+            for(i in password){
+                var ps: Int = i.toInt()
+                if (ps >= 65 && ps <= 90) alpa++
+                if (ps >= 95 && ps <= 122) alpa++
+                if (ps >= 48 && ps <= 57) num++
+            }
+
             when {
                 TextUtils.isEmpty(email) -> emailField!!.error = "Enter email address!"
+                !email.contains("@") -> emailField!!.error = "Email must contain '@'"
+                !email.endsWith(".com") && !email.endsWith(".co.id") -> emailField!!.error = "Email must contain '.com' or '.co.id'"
+                email.get(idxAt+1) == '.' || email.get(idxAt-1) == '.' -> emailField!!.error = "Email cannot contain '.@' or '@.'"
                 TextUtils.isEmpty(password) -> passwordField!!.error = "Enter password!"
-                !password.matches("^[a-zA-Z0-9]*$".toRegex()) -> passwordField!!.error = "password must be in alphanumeric format"
+                alpa == 0 || num == 0 -> passwordField!!.error = "password must be in alphanumeric format"
                 TextUtils.isEmpty(repassword) -> re_passwordField!!.error = "Please retype the password"
                 password != repassword -> re_passwordField!!.error = "Password and Retype Password must be match"
 

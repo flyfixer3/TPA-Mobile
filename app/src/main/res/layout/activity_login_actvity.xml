@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign in your account"
+        android:text="@string/title_login"
         android:textSize="20sp"/>
 
     <LinearLayout
@@ -56,7 +56,19 @@
             android:textSize="20sp"
             android:textColor="@color/colorPrimary"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="30dp"/>
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/moveRegis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/move_regis"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:textAllCaps="false"
+            android:textAlignment="center"/>
     </LinearLayout>
 
 </LinearLayout>

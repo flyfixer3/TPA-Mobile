@@ -3,17 +3,10 @@ package com.tpa.questapp
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.common.api.ApiException
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,10 +15,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login_actvity.*
-import kotlinx.android.synthetic.main.activity_login_actvity.emailField
-import kotlinx.android.synthetic.main.activity_login_actvity.passwordField
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_register_activtity.*
+
 
 class LoginActvity : AppCompatActivity() {
 
@@ -40,14 +30,39 @@ class LoginActvity : AppCompatActivity() {
     private fun init() {
         auth = Firebase.auth
         database = Firebase.database.reference
+        moveRegis.setOnClickListener{
+            startActivity(
+                Intent(
+                    this@LoginActvity,
+                    RegisterActivtity::class.java
+                ))
+        }
         loginButton.setOnClickListener { view ->
             var email = emailField.getText().toString()
             var password = passwordField.getText().toString()
+            var idxAt = email.indexOf('@')
+
+            var alpa = 0
+            var num = 0
+            for(i in password){
+               var ps: Int = i.toInt()
+                if (ps >= 65 && ps <= 90) alpa++
+                if (ps >= 95 && ps <= 122) alpa++
+                if (ps >= 48 && ps <= 57) num++
+            }
 
             if (email.equals("")) {
                 showMessageDialog("Email Field Required", "Email must be filled")
+            } else if(!email.contains("@")){
+                showMessageDialog("Invalid Email","Email must contain '@'")
+            } else if(!email.endsWith(".com") && !email.endsWith(".co.id")){
+                showMessageDialog("Invalid Email","Email must contain '.com' or '.co.id'")
+            } else if(email.get(idxAt+1) == '.' || email.get(idxAt-1) == '.' ){
+                showMessageDialog("Invalid Email","Email cannot contain '.@' or '@.")
             } else if (password.equals("")) {
                 showMessageDialog("Password Field Required", "Password must be filled")
+            } else if (alpa == 0 || num == 0){
+                showMessageDialog("Invalid Password", "Pasword must be alphanumeric")
             } else {
 //                showMessageDialog("Unsuccessful Login", "Invalid Email or Password")
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)

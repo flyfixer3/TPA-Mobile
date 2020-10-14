@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.fragment_profile.view.*
 class ProfileFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
-//    private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var googleSignInClient: GoogleSignInClient
 //    var context: Activity? = null
 
     override fun onCreateView(
@@ -43,12 +43,12 @@ class ProfileFragment : Fragment() {
         val email = auth.currentUser!!.email.toString()
         database = FirebaseDatabase.getInstance().getReference("users").child(userId)
 
-//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//            .requestIdToken(getString(R.string.default_web_client_id))
-//            .requestEmail()
-//            .build()
-//        auth = Firebase.auth
-//        googleSignInClient = GoogleSignIn.getClient(activity!!.application, gso)
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        auth = Firebase.auth
+        googleSignInClient = GoogleSignIn.getClient(activity!!.application, gso)
 
         database.addValueEventListener( object  : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -71,11 +71,12 @@ class ProfileFragment : Fragment() {
 
             }
         })
-//        view.logoutTxt.setOnClickListener{
-//            googleSignInClient.signOut()
-//            val i = Intent(context, MainActivity::class.java)
-//            this.startActivity(i)
-//        }
+        view.logoutTxt.setOnClickListener{
+            googleSignInClient.signOut()
+            val i = Intent(context, MainActivity::class.java)
+            this.startActivity(i)
+            activity!!.finish()
+        }
         return view
     }
 }
