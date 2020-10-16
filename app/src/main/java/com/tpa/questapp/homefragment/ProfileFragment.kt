@@ -16,7 +16,9 @@ import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import com.tpa.questapp.MainActivity
+import com.tpa.questapp.ProfileDetailActivity
 import com.tpa.questapp.R
+import com.tpa.questapp.UserFollowActivity
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 
@@ -76,6 +78,26 @@ class ProfileFragment : Fragment() {
             val i = Intent(context, MainActivity::class.java)
             this.startActivity(i)
             activity!!.finish()
+        }
+        view.followerUserListButton.setOnClickListener {
+            val i = Intent(context, UserFollowActivity::class.java)
+            this.startActivity(i)
+        }
+        view.followingUserListButton.setOnClickListener{
+            val i = Intent(context, UserFollowActivity::class.java)
+            this.startActivity(i)
+        }
+        view.questionUserListButton.setOnClickListener {
+            val i = Intent(context, ProfileDetailActivity::class.java)
+            this.startActivity(i)
+        }
+        view.topicUserListButton.setOnClickListener {
+            val i = Intent(context, ProfileDetailActivity::class.java)
+            this.startActivity(i)
+        }
+        view.roomCreatedListButton.setOnClickListener {
+            val i = Intent(context, ProfileDetailActivity::class.java)
+            this.startActivity(i)
         }
         return view
     }

@@ -2,15 +2,13 @@ package com.tpa.questapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.SparseBooleanArray
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.tpa.questapp.model.User
 import kotlinx.android.synthetic.main.activity_register_detail.*
-import kotlinx.android.synthetic.main.activity_register_major.*
 
 
 class RegisterDetailActivity : AppCompatActivity() {

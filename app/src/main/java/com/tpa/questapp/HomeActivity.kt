@@ -3,14 +3,12 @@ package com.tpa.questapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tpa.questapp.homefragment.AnswerFragment
 import com.tpa.questapp.homefragment.DiscoverFragment
 import com.tpa.questapp.homefragment.HomeFragment
 import com.tpa.questapp.homefragment.ProfileFragment
+import com.tpa.questapp.search.SearchActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {

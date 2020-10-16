@@ -129,7 +129,7 @@
                 android:layout_height="match_parent"
                 android:layout_columnWeight="1">
                 <Button
-                    android:id="@+id/button1"
+                    android:id="@+id/followerUserListButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0 Follower"
@@ -145,7 +145,7 @@
                 android:layout_height="match_parent"
                 android:layout_columnWeight="1">
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/followingUserListButton"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:text="0 Following"
@@ -161,7 +161,7 @@
                 android:layout_height="match_parent"
                 android:layout_columnWeight="1">
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/questionUserListButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0 Question"
@@ -177,7 +177,7 @@
                 android:layout_height="match_parent"
                 android:layout_columnWeight="1">
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/answerUserListButton"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:text="0 Answer"
@@ -193,6 +193,7 @@
                 android:layout_height="match_parent"
                 android:layout_columnWeight="1">
                 <Button
+                    android:id="@+id/topicUserListButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0 Topic Interest"
@@ -208,6 +209,7 @@
                 android:layout_height="match_parent"
                 android:layout_columnWeight="1">
                 <Button
+                    android:id="@+id/roomCreatedListButton"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:text="0 Room Created"

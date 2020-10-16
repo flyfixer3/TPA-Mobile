@@ -2,8 +2,6 @@ package com.tpa.questapp
 
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Color.BLACK
-import android.graphics.Color.WHITE
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.SparseBooleanArray
@@ -11,13 +9,12 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import android.widget.RadioButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_register_detail.*
+import com.tpa.questapp.model.User
 import kotlinx.android.synthetic.main.activity_register_major.*
 
 class RegisterMajor : AppCompatActivity() {
@@ -172,7 +169,14 @@ class RegisterMajor : AppCompatActivity() {
                              listTopic: MutableList<String>
     ) {
 
-        val user = User(pictProfile,fullname, major, location, gender, job)
+        val user = User(
+            pictProfile,
+            fullname,
+            major,
+            location,
+            gender,
+            job
+        )
         database.child("users").child(userId).setValue(user)
         listTopic.forEach {
             database.child("users").child(userId).child("listTopic").push().setValue(it)
