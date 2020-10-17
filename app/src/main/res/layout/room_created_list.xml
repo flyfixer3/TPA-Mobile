@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="horizontal">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/roomCreatedListImg"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/profile"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:id="@+id/nameRoomCreatedListTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User____________ FullName"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/topicRoomCreatedListTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="topic" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

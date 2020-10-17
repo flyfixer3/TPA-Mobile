@@ -1,0 +1,45 @@
+package com.tpa.questapp.model
+
+import android.os.Parcel
+import android.os.Parcelable
+
+data class Room(
+    var userId: String? = "",
+    var imgRoom: String? = "",
+    var nameRoom: String? = "",
+    var descRoom: String? = "",
+    var topic: String? = ""
+): Parcelable{
+
+
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
+    ){
+
+    }
+    override fun writeToParcel(parcel: Parcel?, flags: Int) {
+        parcel?.writeString(userId)
+        parcel?.writeString(imgRoom)
+        parcel?.writeString(nameRoom)
+        parcel?.writeString(descRoom)
+        parcel?.writeString(topic)
+    }
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Room> {
+        override fun createFromParcel(parcel: Parcel): Room {
+            return Room(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Room?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
+

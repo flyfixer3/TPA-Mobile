@@ -11,17 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/list_item_search"/>
+        app:layout_constraintBottom_toTopOf="@+id/list_user_search"/>
 
     <ListView
-        android:id="@+id/list_item_search"
+        android:id="@+id/list_user_search"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_box" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/search_box"
+        app:layout_constraintBottom_toTopOf="@+id/list_topic_search"/>
 
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="No Result"/>-->
+    <ListView
+        android:id="@+id/list_topic_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/list_user_search"/>
+
+
+    <!--    <TextView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="No Result"/>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

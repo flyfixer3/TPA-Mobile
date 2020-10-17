@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Quest</string>
+    <string name="log_google">Masuk dengan Google</string>
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
+    <string name="email_hint">Surel</string>
+    <string name="password_hint">Sandi</string>
+    <string name="repassword_hint">Konfirmasi Sandi</string>
+    <string name="fullNameHint">Nama Lengkap</string>
+    <string name="lbGender">Jenis Kelamin</string>
+    <string name="lbrbMale">Laki-Laki</string>
+    <string name="lbrbFemale">Perempuan</string>
+    <string name="agreement">Saya setuju dengan peraturan dan kondsi Quest Group</string>
+    <string name="job_hint">Pekerjaan</string>
+    <string name="location_hint">Lokasi</string>
+    <string name="next">Selanjutnya</string>
+    <string name="move_regis">Tidak punya akun? Daftar Sekarang</string>
+    <string name="title_login">Masuk dengan akun</string>
+    <string name="title_register">Daftarkan Akun</string>
+    <string name="title_register_detail">Isi Akun</string>
+    <string name="title_register_major">Pilih jurusan dan 3 topik mungkin Anda suka</string>
+    <string name="hello_blank_fragment">Hello</string>
+    <string name="room_name">Nama Ruang</string>
+    <string name="create_room">Buat  Ruang</string>
+    <string name="home">Utama</string>
+    <string name="answer">Jawaban</string>
+    <string name="discover">Ruang</string>
+    <string name="profile">Profil</string>
+    <string name="submit">Ok</string>
+</resources>
