@@ -3,6 +3,7 @@ package com.tpa.questapp.profiledetailfragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.tpa.questapp.profiledetailfragment.usertopic.UserTopicInterestTabFragment
 
 class ProfileDetailPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm)  {
     // sebuah list yang menampung objek Fragment
