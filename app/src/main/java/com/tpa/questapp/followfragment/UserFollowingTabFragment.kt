@@ -14,19 +14,15 @@ class UserFollowingTabFragment : Fragment() {
     private lateinit var database: DatabaseReference
     private lateinit var userList: ArrayList<User>
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         database = FirebaseDatabase.getInstance().getReference("users")
         val view =  inflater.inflate(R.layout.fragment_user_following_tab, container, false)
         userList = arrayListOf()
-
         database.addValueEventListener(object  : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
             override fun onDataChange(p0: DataSnapshot) {
                 userList.clear()
                 if(p0.exists()){
@@ -37,7 +33,6 @@ class UserFollowingTabFragment : Fragment() {
                     view.followingListView.adapter = ListFollowingAdapter(view.context, R.layout.list_following, userList)
                 }
             }
-
         })
         return view
     }

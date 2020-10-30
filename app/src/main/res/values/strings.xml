@@ -49,8 +49,9 @@
         <item>Information</item>
         <item>Technology</item>
         <item>Web</item>
-        <item>Mobile</item>
+        <item>Mobile Android</item>
         <item>Object Oriented Programming</item>
+        <item>Design and Analysis</item>
         <item>Java</item>
     </string-array>
 
@@ -90,4 +91,7 @@
     <string name="write_your_question">Write your question</string>
     <string name="question">Question</string>
     <string name="create_question">Create Question</string>
+    <string name="created_room_by_you">Created Room by You</string>
+    <string name="room_you_might_like">Room you might like</string>
+    <string name="room_following_by_you">Room Following by You</string>
 </resources>

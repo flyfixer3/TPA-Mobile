@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="130dp"
+    android:layout_height="200dp"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roombackground"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/roomListImg"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="35dp"
+            android:src="@mipmap/profile" />
+
+        <TextView
+            android:id="@+id/roomNameList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingTop="5dp"
+            android:text="Room Name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/roomTopicList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_horizontal"
+            android:text="Room Name"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"/>
+
+        <Button
+            android:id="@+id/followDiscoverBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="follow"
+            android:textColor="@color/colorPrimary"
+            android:textSize="10sp" />
+        <Button
+            android:id="@+id/unfollowDiscoverBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="Follow"
+            android:visibility="invisible"
+            android:textColor="@color/colorPrimary"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+</LinearLayout>

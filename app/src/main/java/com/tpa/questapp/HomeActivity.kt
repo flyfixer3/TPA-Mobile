@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.tpa.questapp.homefragment.AnswerFragment
-import com.tpa.questapp.homefragment.DiscoverFragment
 import com.tpa.questapp.homefragment.HomeFragment
 import com.tpa.questapp.homefragment.ProfileFragment
+import com.tpa.questapp.homefragment.answerpagefragment.DiscoverFragment
 import com.tpa.questapp.search.SearchActivity
 import kotlinx.android.synthetic.main.activity_home.*
 

@@ -13,6 +13,8 @@ class UserFollowActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        val pos = intent.getIntExtra("tabUserFollow",0)
         viewpager_follow.adapter = FollowPagerAdapter(supportFragmentManager)
+        viewpager_follow.setCurrentItem(pos)
     }
 }

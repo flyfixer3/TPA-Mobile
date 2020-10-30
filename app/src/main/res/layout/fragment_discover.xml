@@ -1,10 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".homefragment.DiscoverFragment">
+    tools:context=".homefragment.answerpagefragment.DiscoverFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+<!--                    show room might like-->
+                    <TextView
+                        android:id="@+id/roomMightLiketv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/room_you_might_like"
+                        android:textSize="20sp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/roomMightLike"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+<!--                    show created room by user-->
+                    <TextView
+                        android:id="@+id/roomCreatedDiscovertv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/created_room_by_you"
+                        android:textSize="20sp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/roomCreatedDiscover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+<!--                    show follow room user-->
+                    <TextView
+                        android:id="@+id/roomFollowDiscovertv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/room_following_by_you"
+                        android:textSize="20sp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/roomFollowDiscover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+<!--                    show topic1-->
+                    <TextView
+                        android:id="@+id/roomTopic1Discovertv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/roomTopic1Discover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <!--                    show topic2-->
+                    <TextView
+                        android:id="@+id/roomTopic2Discovertv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/roomTopic2Discover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <!--                    show topic3-->
+                    <TextView
+                        android:id="@+id/roomTopic3Discovertv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/roomTopic3Discover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <!--                    show topic4-->
+                    <TextView
+                        android:id="@+id/roomTopic4Discovertv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/roomTopic4Discover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <!--                    show topic5-->
+                    <TextView
+                        android:id="@+id/roomTopic5Discovertv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/roomTopic5Discover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <!--                    show topic6-->
+                    <TextView
+                        android:id="@+id/roomTopic6Discovertv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/roomTopic6Discover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <!--                    show topic7-->
+                    <TextView
+                        android:id="@+id/roomTopic7Discovertv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/roomTopic7Discover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <!--                    show topic8-->
+                    <TextView
+                        android:id="@+id/roomTopic8Discovertv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/roomTopic8Discover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <!--                    show topic9-->
+                    <TextView
+                        android:id="@+id/roomTopic9Discovertv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/roomTopic9Discover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <!--                    show topic10-->
+                    <TextView
+                        android:id="@+id/roomTopic10Discovertv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/roomTopic10Discover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,7 +190,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_add_box_24"
-            app:backgroundTint="@color/colorAccent" />
+            app:backgroundTint="@color/colorAccent"/>
     </RelativeLayout>
 
-</RelativeLayout>
+</FrameLayout>

@@ -1,21 +1,20 @@
 package com.tpa.questapp.room
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.tpa.questapp.R
-import com.tpa.questapp.RegisterActivtity
 import com.tpa.questapp.model.Room
-import kotlinx.android.synthetic.main.activity_register_major.*
 import kotlinx.android.synthetic.main.activity_room_form.*
+import java.text.DateFormat
 import java.util.*
+
 
 class RoomFormActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
@@ -61,9 +60,10 @@ class RoomFormActivity : AppCompatActivity() {
     }
 
     private fun writeRoom(userId: String, imgRoom: String, nameRoom: String, descRoom: String, topic: String){
-        val room = Room(userId, imgRoom, nameRoom, descRoom, topic)
-        val roomId = UUID.randomUUID()
-        database.child("rooms").child(roomId.toString()).setValue(room)
-        database.child("users").child(userId).child("rooms").child(roomId.toString()).setValue(room)
+        val roomId = UUID.randomUUID().toString()
+        val currentDateTimeString = DateFormat.getDateTimeInstance().format(Date())
+        val room = Room(roomId, userId, imgRoom, nameRoom, descRoom, topic, currentDateTimeString)
+        database.child("rooms").child(roomId).setValue(room)
+        database.child("users").child(userId).child("rooms").child(roomId).setValue(room)
     }
 }

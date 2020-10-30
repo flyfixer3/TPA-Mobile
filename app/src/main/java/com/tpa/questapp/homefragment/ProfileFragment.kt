@@ -1,5 +1,6 @@
 package com.tpa.questapp.homefragment
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -33,6 +34,7 @@ class ProfileFragment : Fragment() {
     private lateinit var googleSignInClient: GoogleSignInClient
 //    var context: Activity? = null
 
+    @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +46,7 @@ class ProfileFragment : Fragment() {
         val userId = auth.currentUser!!.uid
         val email = auth.currentUser!!.email.toString()
         database = FirebaseDatabase.getInstance().getReference("users").child(userId)
-
+        
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -87,22 +89,31 @@ class ProfileFragment : Fragment() {
         }
         view.followerUserListButton.setOnClickListener {
             val i = Intent(context, UserFollowActivity::class.java)
+            i.putExtra("tabUserFollow",0)
             this.startActivity(i)
         }
         view.followingUserListButton.setOnClickListener{
             val i = Intent(context, UserFollowActivity::class.java)
+            i.putExtra("tabUserFollow",1)
             this.startActivity(i)
+        }
+        view.answerUserListButton.setOnClickListener {
+            val fragment: Fragment = AnswerFragment()
+            fragmentManager!!.beginTransaction().replace(R.id.homeContainer,fragment).commit()
         }
         view.questionUserListButton.setOnClickListener {
             val i = Intent(context, ProfileDetailActivity::class.java)
+            i.putExtra("tabDetailProfile",0)
             this.startActivity(i)
         }
         view.topicUserListButton.setOnClickListener {
             val i = Intent(context, ProfileDetailActivity::class.java)
+            i.putExtra("tabDetailProfile",1)
             this.startActivity(i)
         }
         view.roomCreatedListButton.setOnClickListener {
             val i = Intent(context, ProfileDetailActivity::class.java)
+            i.putExtra("tabDetailProfile",2)
             this.startActivity(i)
         }
         return view
