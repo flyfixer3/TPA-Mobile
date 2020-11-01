@@ -21,6 +21,7 @@ import com.tpa.questapp.model.Room
 import com.tpa.questapp.room.RoomFormActivity
 import com.tpa.questapp.room.RoomListAdapter
 import com.tpa.questapp.room.RoomMightLikeClickListener
+import com.tpa.questapp.roomdetail.RoomDetailActivity
 import kotlinx.android.synthetic.main.fragment_discover.view.*
 
 class DiscoverFragment : Fragment() {
@@ -141,7 +142,7 @@ class DiscoverFragment : Fragment() {
                     "Room ${room.roomId} berhasil di klik",
                     Toast.LENGTH_SHORT
                 ).show()
-                startActivity(Intent(view.context, LoginActvity::class.java))
+                startActivity(Intent(view.context, RoomDetailActivity::class.java))
             }
 
         })
