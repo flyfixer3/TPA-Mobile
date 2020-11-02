@@ -6,9 +6,11 @@ import android.os.Parcelable
 class Question (
     var userId: String? = "",
     var question: String? = "",
-    var topic: String? = ""
+    var topic: String? = "",
+    var createdDate: String? = ""
 ):Parcelable{
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
@@ -19,6 +21,7 @@ class Question (
         parcel.writeString(userId)
         parcel.writeString(question)
         parcel.writeString(topic)
+        parcel.writeString(createdDate)
     }
 
     override fun describeContents(): Int {

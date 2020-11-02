@@ -28,4 +28,12 @@
     <string name="discover">Ruang</string>
     <string name="profile">Profil</string>
     <string name="submit">Ok</string>
+    <string name="write_your_question">Tulis pertanyaanmu</string>
+    <string name="question">Pertanyaan</string>
+    <string name="create_question">Tanyakan Sesuatu</string>
+    <string name="created_room_by_you">Ruang yang dibuat kamu</string>
+    <string name="room_you_might_like">Ruang yang mungkin kamu suka</string>
+    <string name="room_following_by_you">Ruang yang kamu ikuti</string>
+    <string name="title_activity_room_detail">A</string>
+    <string name="action_settings">Pengaturan</string>
 </resources>
