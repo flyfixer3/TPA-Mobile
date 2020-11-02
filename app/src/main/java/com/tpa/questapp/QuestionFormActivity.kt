@@ -11,6 +11,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.tpa.questapp.model.Question
 import kotlinx.android.synthetic.main.activity_question_form.*
+import java.text.DateFormat
 import java.util.*
 
 class QuestionFormActivity : AppCompatActivity() {
@@ -47,8 +48,10 @@ class QuestionFormActivity : AppCompatActivity() {
         }
     }
     private fun writeQuestion(userId: String, question: String, topic: String){
-        val question = Question(userId, question, topic)
+        val questionDate = DateFormat.getDateTimeInstance().format(Date())
+        val question = Question(userId, question, topic, questionDate)
         val questionId = UUID.randomUUID()
+
         database.child("questions").child(questionId.toString()).setValue(question)
         database.child("users").child(userId).child("questions").child(questionId.toString()).setValue(question)
     }
