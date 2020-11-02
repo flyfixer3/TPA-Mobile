@@ -52,7 +52,6 @@ class RoomListAdapter : RecyclerView.Adapter<RoomListAdapter.Companion.Holder>{
 
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         var rv: View
         var holder: Holder
@@ -80,7 +79,6 @@ class RoomListAdapter : RecyclerView.Adapter<RoomListAdapter.Companion.Holder>{
             holder!!.followBtn.isVisible = false
         }
 
-        var keyFollowRooms: String = ""
         database.addValueEventListener(object : ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
@@ -89,7 +87,6 @@ class RoomListAdapter : RecyclerView.Adapter<RoomListAdapter.Companion.Holder>{
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (h in snapshot.child("users").child(auth.uid.toString()).child("followrooms").children){
                     val room = h.getValue(Room::class.java)
-                    keyFollowRooms = h.key.toString()
                     if(room!!.roomId.equals(at.roomId)){
                         holder.followBtn.setText("unfollow")
                     }
@@ -100,11 +97,11 @@ class RoomListAdapter : RecyclerView.Adapter<RoomListAdapter.Companion.Holder>{
         holder!!.followBtn.setOnClickListener {
             if(holder.followBtn.text.equals("follow")){
                 holder.followBtn.setText("unfollow")
-                database.child("users").child(auth.uid.toString()).child("followrooms").push().setValue(at)
+                database.child("users").child(auth.uid.toString()).child("followrooms").child(at.roomId.toString()).setValue(at)
                 database.child("rooms").child(at.roomId.toString()).child("followers").child(auth.uid.toString()).setValue(auth.uid.toString())
             }else{
                 holder.followBtn.setText("follow")
-                database.child("users").child(auth.uid.toString()).child("followrooms").child(keyFollowRooms).removeValue()
+                database.child("users").child(auth.uid.toString()).child("followrooms").child(at.roomId.toString()).removeValue()
                 database.child("rooms").child(at.roomId.toString()).child("followers").child(auth.uid.toString()).removeValue()
             }
         }

@@ -175,7 +175,7 @@ class RegisterMajor : AppCompatActivity() {
             major,
             location,
             gender,
-            job
+            job, userId
         )
         database.child("users").child(userId).setValue(user)
         listTopic.forEach {

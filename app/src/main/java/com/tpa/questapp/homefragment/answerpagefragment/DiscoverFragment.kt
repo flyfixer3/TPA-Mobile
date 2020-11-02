@@ -50,12 +50,9 @@ class DiscoverFragment : Fragment() {
         )
         // Inflate the layout for this fragment
         view.addRoomButton.setOnClickListener{
-            startActivity(
-                Intent(
-                    this.activity,
-                    RoomFormActivity::class.java
-                )
-            )
+            val intent = Intent(view.context, RoomFormActivity::class.java)
+            intent.putExtra("roomId", "")
+            startActivity(intent)
         }
         layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
         view.roomMightLike.layoutManager = layoutManager
@@ -142,11 +139,13 @@ class DiscoverFragment : Fragment() {
                     "Room ${room.roomId} berhasil di klik",
                     Toast.LENGTH_SHORT
                 ).show()
-                startActivity(Intent(view.context, RoomDetailActivity::class.java))
+                val intent = Intent(view.context, RoomDetailActivity::class.java)
+                intent.putExtra("roomId", room.roomId)
+                startActivity(intent)
             }
 
         })
-        database.addValueEventListener(object  : ValueEventListener, RoomMightLikeClickListener {
+        database.limitToFirst(10).addValueEventListener(object  : ValueEventListener, RoomMightLikeClickListener {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
@@ -158,6 +157,7 @@ class DiscoverFragment : Fragment() {
                         val room = h.getValue(Room::class.java)
                         roomList.add(room!!)
                     }
+                    //show room might like
                     adap = RoomListAdapter(roomList,view.context)
                     view.roomMightLike.adapter = adap
                     adap.listener = this
@@ -227,6 +227,17 @@ class DiscoverFragment : Fragment() {
                     val adp10 = RoomListAdapter(roomTopic10,view.context)
                     view.roomTopic10Discover.adapter = adp10
                     view.roomTopic10Discovertv.isVisible = !roomTopic10.isEmpty()
+
+                    adp1.listener = this
+                    adp2.listener = this
+                    adp3.listener = this
+                    adp4.listener = this
+                    adp5.listener = this
+                    adp6.listener = this
+                    adp7.listener = this
+                    adp8.listener = this
+                    adp9.listener = this
+                    adp10.listener = this
                 }
             }
 
@@ -235,7 +246,9 @@ class DiscoverFragment : Fragment() {
                     "Room ${room.roomId} berhasil di klik",
                     Toast.LENGTH_SHORT
                 ).show()
-                startActivity(Intent(view.context, LoginActvity::class.java))
+                val intent = Intent(view.context, RoomDetailActivity::class.java)
+                intent.putExtra("roomId", room.roomId)
+                startActivity(intent)
             }
 
         })
