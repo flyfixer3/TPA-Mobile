@@ -107,8 +107,9 @@ class RoomDetailActivity : AppCompatActivity() {
 
         }
         viewpager_detailroom.adapter = RoomDetailPagerAdapter(supportFragmentManager)
+
         showMemberBtn.setOnClickListener {
-            val intent = Intent(this@RoomDetailActivity, RoomDetailActivity::class.java)
+            val intent = Intent(this@RoomDetailActivity, RoomMemberActivity::class.java)
             intent.putExtra("roomId", roomId)
             startActivity(intent)
         }

@@ -1,9 +1,7 @@
 package com.tpa.questapp.homefragment.answerpagefragment
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,11 +14,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.tpa.questapp.LoginActvity
 import com.tpa.questapp.R
-import com.tpa.questapp.R.array.*
 import com.tpa.questapp.model.Room
 import com.tpa.questapp.room.RoomFormActivity
 import com.tpa.questapp.room.RoomListAdapter
 import com.tpa.questapp.room.RoomMightLikeClickListener
+import com.tpa.questapp.room.ViewAllRoomActivity
 import com.tpa.questapp.roomdetail.RoomDetailActivity
 import kotlinx.android.synthetic.main.fragment_discover.view.*
 
@@ -32,6 +30,7 @@ class DiscoverFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var roomList: ArrayList<Room>
     private lateinit var roomCreatedUser: ArrayList<Room>
+    private lateinit var roomFollowUser: ArrayList<Room>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +42,7 @@ class DiscoverFragment : Fragment() {
         userDatabase = FirebaseDatabase.getInstance().getReference("users").child(auth.uid.toString())
         roomList = arrayListOf()
         roomCreatedUser = arrayListOf()
+        roomFollowUser = arrayListOf()
         val view: View = inflater.inflate(
             R.layout.fragment_discover,
             container,
@@ -107,6 +107,7 @@ class DiscoverFragment : Fragment() {
                     val room = h.getValue(Room::class.java)
                     roomCreatedUser.add(room!!)
                 }
+                view.roomCreatedDiscovertv.isVisible = !roomCreatedUser.isEmpty()
                 val adp = RoomListAdapter(roomCreatedUser,view.context)
                 view.roomCreatedDiscover.adapter = adp
                 adp.listener = this
@@ -145,11 +146,12 @@ class DiscoverFragment : Fragment() {
             }
 
         })
-        database.limitToFirst(10).addValueEventListener(object  : ValueEventListener, RoomMightLikeClickListener {
+        database.addValueEventListener(object  : ValueEventListener, RoomMightLikeClickListener {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
 
+//            show room might like
             override fun onDataChange(snapshot: DataSnapshot) {
                 roomList.clear()
                 if(snapshot.exists()){
@@ -250,8 +252,42 @@ class DiscoverFragment : Fragment() {
                 intent.putExtra("roomId", room.roomId)
                 startActivity(intent)
             }
+        })
+
+        userDatabase.child("followrooms").addValueEventListener( object : ValueEventListener, RoomMightLikeClickListener{
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+//            show followed room
+            override fun onDataChange(snapshot: DataSnapshot) {
+                roomFollowUser.clear()
+                for (a in snapshot.children){
+                    val room = a.getValue(Room::class.java)
+                    roomFollowUser.add(room!!)
+                }
+                val adapF = RoomListAdapter(roomFollowUser,view.context)
+                view.roomFollowDiscover.adapter = adapF
+                view.roomFollowDiscovertv.isVisible = !roomFollowUser.isEmpty()
+                adapF.listener = this
+            }
+
+            override fun onItemClicked(view: View, room: Room) {
+                Toast.makeText(view.context,
+                    "Room ${room.roomId} berhasil di klik",
+                    Toast.LENGTH_SHORT
+                ).show()
+                val intent = Intent(view.context, RoomDetailActivity::class.java)
+                intent.putExtra("roomId", room.roomId)
+                startActivity(intent)
+            }
 
         })
+
+        view.viewAllRoom.setOnClickListener {
+            val intent = Intent (view.context, ViewAllRoomActivity::class.java)
+            startActivity(intent)
+        }
         return view
     }
 }
