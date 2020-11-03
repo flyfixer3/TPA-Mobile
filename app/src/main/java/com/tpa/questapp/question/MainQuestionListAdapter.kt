@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +20,9 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import com.tpa.questapp.R
+import com.tpa.questapp.model.Room
 import com.tpa.questapp.model.Ticket
+import com.tpa.questapp.model.User
 import com.tpa.questapp.room.RoomListAdapter
 import kotlinx.android.synthetic.main.list_post.view.*
 import org.w3c.dom.Text
@@ -39,6 +42,7 @@ class MainQuestionListAdapter : RecyclerView.Adapter<MainQuestionListAdapter.Com
             lateinit var upvote: TextView
             lateinit var downvote: TextView
             lateinit var followBtn: Button
+            lateinit var answerContainer: LinearLayout
 
             constructor(rv: View) : super(rv){
                 userName = rv.findViewById(R.id.txtUserName) as TextView
@@ -50,7 +54,8 @@ class MainQuestionListAdapter : RecyclerView.Adapter<MainQuestionListAdapter.Com
                 answerCount = rv.findViewById(R.id.answerCount) as TextView
                 upvote = rv.findViewById(R.id.textUpvote) as TextView
                 downvote = rv.findViewById(R.id.textDownvote) as TextView
-                followBtn = rv.findViewById(R.id.followDiscoverBtn) as Button
+                followBtn = rv.findViewById(R.id.followHomeBtn) as Button
+                answerContainer = rv.findViewById(R.id.answerContainer) as LinearLayout
             }
         }
     }
@@ -91,10 +96,23 @@ class MainQuestionListAdapter : RecyclerView.Adapter<MainQuestionListAdapter.Com
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                Picasso.get().load(snapshot.child("pictProfile").toString()).into(holder!!.profileImg)
-                holder.userName.setText(snapshot.child("fullname").toString())
+                Picasso.get().load(snapshot.child("pictProfile").value.toString().trim()).into(holder!!.profileImg)
+                holder.userName.setText(snapshot.child("fullname").value.toString().trim())
             }
 
+        })
+        database.addValueEventListener(object : ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (h in snapshot.child("users").child(auth.uid.toString()).child("following").children){
+                    if(h.value.toString().equals(at.userId.toString())){
+                        holder.followBtn.setText("Unfollow")
+                    }
+                }
+            }
         })
         database.child("question").child(at.questionId.toString()).child("answer").orderByChild("upvote").limitToFirst(1).addValueEventListener(object : ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
@@ -103,17 +121,12 @@ class MainQuestionListAdapter : RecyclerView.Adapter<MainQuestionListAdapter.Com
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
-                    holder.answer_date.setText(snapshot.child("answerDate").toString())
-                    holder.answer.setText(snapshot.child("answer").toString())
-                    holder.downvote.setText(snapshot.child("downvote").toString())
-                    holder.upvote.setText(snapshot.child("upvote").toString())
+                    holder.answer_date.setText(snapshot.child("answerDate").value.toString().trim())
+                    holder.answer.setText(snapshot.child("answer").value.toString().trim())
+                    holder.downvote.setText(snapshot.child("downvote").value.toString().trim())
+                    holder.upvote.setText(snapshot.child("upvote").value.toString().trim())
                 }else{
-                    holder.answer_date.isVisible = false
-                    holder.answer.isVisible = false
-                    holder.answer_date.isVisible = false
-                    holder.downvote.isVisible = false
-                    holder.upvote.isVisible = false
-
+                    holder.answerContainer.isVisible = false
                 }
             }
         })
@@ -144,11 +157,11 @@ class MainQuestionListAdapter : RecyclerView.Adapter<MainQuestionListAdapter.Com
         holder!!.followBtn.setOnClickListener {
             if(holder.followBtn.text.equals("Follow")){
                 holder.followBtn.setText("Unfollow")
-                database.child("users").child(auth.uid.toString()).child("following").push().setValue(at)
+                database.child("users").child(auth.uid.toString()).child("following").child(at.userId.toString()).setValue(at.userId.toString())
                 database.child("users").child(at.userId.toString()).child("followers").child(auth.uid.toString()).setValue(auth.uid.toString())
             }else{
                 holder.followBtn.setText("Follow")
-                database.child("users").child(auth.uid.toString()).child("following").child(keyFollowRooms).removeValue()
+                database.child("users").child(auth.uid.toString()).child("following").child(at.userId.toString()).removeValue()
                 database.child("users").child(at.userId.toString()).child("followers").child(auth.uid.toString()).removeValue()
             }
         }
