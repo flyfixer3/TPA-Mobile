@@ -34,6 +34,7 @@ class ViewAllRoomActivity : AppCompatActivity() {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
+                roomList.clear()
                 for (h in snapshot.children){
                     val room = h.getValue(Room::class.java)
                     roomList.add(room!!)
