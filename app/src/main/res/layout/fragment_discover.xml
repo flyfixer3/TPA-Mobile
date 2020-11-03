@@ -36,6 +36,37 @@
                             android:gravity="right"
                             android:textColor="@color/colorAccent"/>
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Filter :     "
+                            android:textSize="16sp"
+                            android:gravity="center_vertical"/>
+                        <Button
+                            android:id="@+id/filterRecentBtn"
+                            android:layout_width="105dp"
+                            android:layout_height="28dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="#A9A9A9"
+                            android:text="Recent Upload"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="10sp" />
+                        <Button
+                            android:id="@+id/filterAlphaBtn"
+                            android:layout_width="105dp"
+                            android:layout_height="28dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginLeft="15dp"
+                            android:text="Alphabetical"
+                            android:textSize="10sp"
+                            android:background="#A9A9A9"
+                            android:textColor="@color/colorPrimary"/>
+                    </LinearLayout>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/roomMightLike"
                         android:layout_width="match_parent"
@@ -186,22 +217,22 @@
                         android:id="@+id/roomTopic10Discover"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="25dp"
+                        android:gravity="end|bottom">
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/addRoomButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_add_box_24"
+                            app:backgroundTint="@color/colorAccent" />
+                    </RelativeLayout>
                 </LinearLayout>
         </RelativeLayout>
     </ScrollView>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="end|bottom"
-        android:layout_margin="25dp">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addRoomButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_add_box_24"
-            app:backgroundTint="@color/colorAccent"/>
-    </RelativeLayout>
 
 </FrameLayout>

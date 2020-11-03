@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".followfragment.UserFollowingTabFragment">
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/followingListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

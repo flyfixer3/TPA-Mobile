@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.tpa.questapp.R
@@ -24,6 +25,8 @@ class UserFollowingTabFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_user_following_tab, container, false)
         userList = arrayListOf()
 
+        val layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
+        view.followingListView.layoutManager = layoutManager
         database.addValueEventListener(object  : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
                 TODO("Not yet implemented")
@@ -57,7 +60,7 @@ class UserFollowingTabFragment : Fragment() {
                         }
                     }
                 }
-                view.followingListView.adapter = ListFollowingAdapter(view.context, R.layout.list_following, allUserList)
+                view.followingListView.adapter = ListFollowingAdapter(allUserList,view.context)
             }
         })
 
