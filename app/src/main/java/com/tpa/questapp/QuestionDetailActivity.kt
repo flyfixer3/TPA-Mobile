@@ -29,6 +29,7 @@ class QuestionDetailActivity : AppCompatActivity(), RecycleViewClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question_detail)
+        loadData()
     }
     fun loadData(){
         auth = FirebaseAuth.getInstance()
