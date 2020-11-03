@@ -43,6 +43,7 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
             lateinit var commentCountPost: TextView
             lateinit var updateBtn: TextView
             lateinit var deleteBtn: TextView
+            lateinit var addComment: TextView
 
             constructor(rv: View) : super(rv){
                 userName = rv.findViewById(R.id.userPostName) as TextView
@@ -53,6 +54,7 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
                 commentCountPost = rv.findViewById(R.id.commentCountPost) as TextView
                 updateBtn = rv.findViewById(R.id.updatePostBtn) as TextView
                 deleteBtn = rv.findViewById(R.id.deletePostBtn) as TextView
+                addComment = rv.findViewById(R.id.addCommentPost) as TextView
             }
         }
     }
@@ -115,6 +117,12 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
 
         holder.deleteBtn.setOnClickListener {
             database.child("rooms").child(at.roomId.toString()).child("posts").child(at.postId.toString()).removeValue()
+        }
+        holder.addComment.setOnClickListener {
+            val intent = Intent(con, commentActivity::class.java)
+            intent.putExtra("roomId", at.roomId)
+            intent.putExtra("postId", at.postId)
+            con.startActivity(intent)
         }
     }
 }
