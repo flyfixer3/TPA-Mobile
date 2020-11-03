@@ -20,16 +20,19 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import com.tpa.questapp.R
+import com.tpa.questapp.RecycleViewClickListener
 import com.tpa.questapp.model.Room
 import com.tpa.questapp.model.Ticket
 import com.tpa.questapp.model.User
 import com.tpa.questapp.room.RoomListAdapter
+import com.tpa.questapp.room.RoomMightLikeClickListener
 import kotlinx.android.synthetic.main.list_post.view.*
 import org.w3c.dom.Text
 
 class MainQuestionListAdapter : RecyclerView.Adapter<MainQuestionListAdapter.Companion.Holder>{
     private lateinit var database: DatabaseReference
     private lateinit var auth: FirebaseAuth
+    var listener: RecycleViewClickListener? = null
     companion object{
         class Holder : RecyclerView.ViewHolder{
             lateinit var userName: TextView
@@ -90,6 +93,9 @@ class MainQuestionListAdapter : RecyclerView.Adapter<MainQuestionListAdapter.Com
         database = Firebase.database.reference
         var at: Ticket
         at = list.get(position)
+        holder.itemView.setOnClickListener{
+            listener?.onItemClicked(it,at)
+        }
         database.child("users").child(at.userId.toString()).addValueEventListener(object : ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
@@ -146,9 +152,7 @@ class MainQuestionListAdapter : RecyclerView.Adapter<MainQuestionListAdapter.Com
 
         holder!!.question_date.setText(at.createdDate)
         holder!!.question.setText(at.question)
-//        holder.itemView.setOnClickListener{
-//            listener?.onItemClicked(it,at)
-//        }
+
         if (at.userId.equals(auth.uid.toString())){
             holder!!.followBtn.isVisible = false
         }
