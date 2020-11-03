@@ -117,6 +117,7 @@ class RoomDetailActivity : AppCompatActivity() {
         addPostRoomDetailBtn.setOnClickListener {
             val intent = Intent(this@RoomDetailActivity, PostRoomFormActivity::class.java)
             intent.putExtra("roomId", roomId)
+            intent.putExtra("postId","add")
             startActivity(intent)
         }
 

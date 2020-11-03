@@ -107,6 +107,10 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
         }
         holder.updateBtn.setOnClickListener {
             Toast.makeText(con,"update",Toast.LENGTH_LONG).show()
+            val intent = Intent(con, PostRoomFormActivity::class.java)
+            intent.putExtra("roomId", at.roomId)
+            intent.putExtra("postId", at.postId)
+            con.startActivity(intent)
         }
 
         holder.deleteBtn.setOnClickListener {
