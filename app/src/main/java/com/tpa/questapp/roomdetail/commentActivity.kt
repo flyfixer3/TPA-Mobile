@@ -9,6 +9,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.tpa.questapp.R
+import com.tpa.questapp.model.Comment
 import kotlinx.android.synthetic.main.activity_comment.*
 import java.util.*
 
@@ -27,7 +28,8 @@ class commentActivity : AppCompatActivity() {
         addCommentForm.setOnClickListener {
             Toast.makeText(this, "Sucess Add Comment", Toast.LENGTH_LONG).show()
             val id = UUID.randomUUID().toString()
-            database.child("rooms").child(roomId).child("posts").child(postId).child("comments").child(id).setValue(commentField)
+            val comment = Comment(id,auth.uid.toString(), commentField.text.toString())
+            database.child("rooms").child(roomId).child("posts").child(postId).child("comments").child(id).setValue(comment)
         }
     }
 }
