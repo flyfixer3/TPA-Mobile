@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".roomdetail.QuestionDetailRoomFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".roomdetail.QuestionDetailRoomFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Button
+        android:id="@+id/addQuestionRoomDetailBtn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Add Question"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorPrimary"/>
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/questionRoomList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <ImageView
+            android:id="@+id/noQuestionImg"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:layout_constraintBottom_toTopOf="@+id/noPostTxt"
+            android:src="@drawable/empty_post"/>
+        <TextView
+            android:id="@+id/noQuestionTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Question in This Room"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

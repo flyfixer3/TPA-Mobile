@@ -217,22 +217,20 @@
                         android:id="@+id/roomTopic10Discover"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="25dp"
-                        android:gravity="end|bottom">
-
-                        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/addRoomButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_add_box_24"
-                            app:backgroundTint="@color/colorAccent" />
-                    </RelativeLayout>
                 </LinearLayout>
         </RelativeLayout>
     </ScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="25dp"
+        android:gravity="end|bottom">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addRoomButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_add_box_24"
+            app:backgroundTint="@color/colorAccent" />
+    </RelativeLayout>
 </FrameLayout>

@@ -39,11 +39,11 @@ class PostRoomFormActivity : AppCompatActivity() {
                 val titlePost = roomPostTitleField!!.text.toString().trim { it <= ' ' }
                 val descPost = roomPostDescriptionField!!.text.toString().trim { it <= ' ' }
                 when {
-                    titlePost.length < 5 -> roomPostTitleField!!.error = "The title post must equals or more 3 characters"
-                    descPost.length > 250 -> roomPostDescriptionField!!.error = "The description maks. 250 characters"
+                    titlePost.length < 5 -> roomPostTitleField!!.error = "The title post field must equals or more 5 characters"
+                    descPost.length > 250 -> roomPostDescriptionField!!.error = "The description field maks. 250 characters"
                     else -> {
                         val imgDef="https://firebasestorage.googleapis.com/v0/b/fir-authquestapp.appspot.com/o/post1.jpg?alt=media&token=5a221865-ba4c-40d7-9cb5-b1650ba58a2b"
-                        writeRoom(auth.uid.toString(), imgDef, titlePost, descPost)
+                        writePost(auth.uid.toString(), imgDef, titlePost, descPost)
                         Toast.makeText(this, "Success Add Post", Toast.LENGTH_LONG).show()
                     }
                 }
@@ -69,7 +69,7 @@ class PostRoomFormActivity : AppCompatActivity() {
                     descPost.length > 250 -> roomPostDescriptionField!!.error = "The description maks. 250 characters"
                     else -> {
                         val imgDef="https://firebasestorage.googleapis.com/v0/b/fir-authquestapp.appspot.com/o/post1.jpg?alt=media&token=5a221865-ba4c-40d7-9cb5-b1650ba58a2b"
-                        writeRoom(auth.uid.toString(), imgDef, titlePost, descPost)
+                        writePost(auth.uid.toString(), imgDef, titlePost, descPost)
                         Toast.makeText(this, "Success Update Post", Toast.LENGTH_LONG).show()
                     }
                 }
@@ -84,14 +84,14 @@ class PostRoomFormActivity : AppCompatActivity() {
                 descPost.length > 250 -> roomPostDescriptionField!!.error = "The description maks. 250 characters"
                 else -> {
                     val imgDef="https://firebasestorage.googleapis.com/v0/b/fir-authquestapp.appspot.com/o/post1.jpg?alt=media&token=5a221865-ba4c-40d7-9cb5-b1650ba58a2b"
-                    writeRoom(auth.uid.toString(), imgDef, titlePost, descPost)
+                    writePost(auth.uid.toString(), imgDef, titlePost, descPost)
                     Toast.makeText(this, "Success Add Post", Toast.LENGTH_LONG).show()
                 }
             }
         }
     }
 
-    private fun writeRoom(userId: String, imgPost: String, titlePost: String, descPost: String){
+    private fun writePost(userId: String, imgPost: String, titlePost: String, descPost: String){
 
         if (postId.equals("add")){
             postId = UUID.randomUUID().toString()

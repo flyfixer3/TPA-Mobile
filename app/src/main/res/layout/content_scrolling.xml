@@ -19,7 +19,7 @@
                 android:id="@+id/imgRoomDetail"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_margin="30dp"
+                android:layout_margin="20dp"
                 android:src="@mipmap/profile" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -34,80 +34,67 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="topic room"
-                        android:textSize="18sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-                    <Button
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
                         android:id="@+id/showMemberBtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Show Member"
                         android:textAllCaps="false"
-                        android:layout_marginTop="5dp"
-                        android:padding="6dp"
-                        android:textSize="18sp"
+                        android:layout_marginTop="8dp"
+                        android:textSize="17sp"
                         android:textStyle="bold"
-                        android:background="@color/colorAccent"
-                        android:textColor="@color/colorPrimary"/>
+                        android:textColor="@color/colorAccent"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+                    <TextView
+                        android:id="@+id/updateRoomBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Update Room"
+                        android:textAllCaps="false"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorAccent"
+                        android:layout_marginRight="15dp"/>
+                    <TextView
+                        android:id="@+id/deleteRoomBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Delete Room"
+                        android:textAllCaps="false"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorAccent"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
         <TextView
             android:id="@+id/descRoomDetail"
-            android:paddingRight="30dp"
-            android:paddingLeft="30dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="desc"/>
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpager_detailroom"
             android:layout_width="match_parent"
-            android:layout_height="570dp">
+            android:layout_height="650dp">
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs_detailroom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"/>
         </androidx.viewpager.widget.ViewPager>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal">
-            <Button
-                android:id="@+id/addPostRoomDetailBtn"
-                android:layout_width="85dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:text="Add Post"
-                android:background="@color/colorAccent"
-                android:textColor="@color/colorPrimary"/>
-            <Button
-                android:id="@+id/addQuestionRoomDetailBtn"
-                android:layout_width="85dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:text="Add Question"
-                android:background="@color/colorAccent"
-                android:textColor="@color/colorPrimary"/>
-            <Button
-                android:id="@+id/updateRoomDetailBtn"
-                android:layout_width="85dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:text="Update Room"
-                android:background="@color/colorAccent"
-                android:textColor="@color/colorPrimary"/>
-            <Button
-                android:id="@+id/deleteRoomDetailBtn"
-                android:layout_width="85dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:text="Delete Room"
-                android:background="@color/colorAccent"
-                android:textColor="@color/colorPrimary"/>
-        </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -24,7 +24,7 @@ import com.tpa.questapp.model.Room
 import com.tpa.questapp.room.RoomFormActivity
 import kotlinx.android.synthetic.main.activity_room_detail.*
 import kotlinx.android.synthetic.main.content_scrolling.*
-import kotlinx.android.synthetic.main.fragment_profile.view.*
+import kotlinx.android.synthetic.main.fragment_post_detail_room.*
 
 class RoomDetailActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -36,11 +36,8 @@ class RoomDetailActivity : AppCompatActivity() {
 
         database = Firebase.database.reference
         auth = FirebaseAuth.getInstance()
-
-        updateRoomDetailBtn.isVisible = false
-        deleteRoomDetailBtn.isVisible = false
-        addPostRoomDetailBtn.isVisible = false
-        addQuestionRoomDetailBtn.isVisible = false
+        updateRoomBtn.isVisible = false
+        deleteRoomBtn.isVisible = false
 
         val roomId:String = intent.getStringExtra("roomId").toString()
         var at: Room? = null
@@ -57,10 +54,10 @@ class RoomDetailActivity : AppCompatActivity() {
                 descRoomDetail.text = at?.descRoom
                 if (at?.userId.equals(auth.uid.toString())){
                     findViewById<FloatingActionButton>(R.id.fab).isVisible = false
-                    updateRoomDetailBtn.isVisible = true
-                    deleteRoomDetailBtn.isVisible = true
-                    addPostRoomDetailBtn.isVisible = true
-                    addQuestionRoomDetailBtn.isVisible = true
+                    updateRoomBtn.isVisible = true
+                    deleteRoomBtn.isVisible = true
+//                    addPostRoomDetailBtn.isVisible = true
+//                    addQuestionRoomDetailBtn.isVisible = true
                 }
             }
         })
@@ -76,8 +73,8 @@ class RoomDetailActivity : AppCompatActivity() {
                     if(room!!.roomId.equals(roomId)){
                         fab.setImageDrawable(ContextCompat.getDrawable(applicationContext,R.drawable.ic_baseline_remove_24))
                         fab.tooltipText = "unfollow"
-                        addPostRoomDetailBtn.isVisible = true
-                        addQuestionRoomDetailBtn.isVisible = true
+//                        addPostRoomDetailBtn.isVisible = true
+//                        addQuestionRoomDetailBtn.isVisible = true
                     }
                 }
             }
@@ -92,8 +89,8 @@ class RoomDetailActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
                 database.child("users").child(auth.uid.toString()).child("followrooms").child(roomId).setValue(at)
                 database.child("rooms").child(roomId).child("followers").child(auth.uid.toString()).setValue(auth.uid.toString())
-                addPostRoomDetailBtn.isVisible = true
-                addQuestionRoomDetailBtn.isVisible = true
+//                addPostRoomDetailBtn.isVisible = true
+//                addQuestionRoomDetailBtn.isVisible = true
             }else{
                 fab.setImageDrawable(ContextCompat.getDrawable(applicationContext,R.drawable.ic_baseline_follow_24))
                 fab.tooltipText = "follow"
@@ -101,8 +98,8 @@ class RoomDetailActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
                 database.child("users").child(auth.uid.toString()).child("followrooms").child(roomId).removeValue()
                 database.child("rooms").child(at?.roomId.toString()).child("followers").child(auth.uid.toString()).removeValue()
-                addPostRoomDetailBtn.isVisible = false
-                addQuestionRoomDetailBtn.isVisible = false
+//                addPostRoomDetailBtn.isVisible = false
+//                addQuestionRoomDetailBtn.isVisible = false
             }
 
         }
@@ -114,19 +111,13 @@ class RoomDetailActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        addPostRoomDetailBtn.setOnClickListener {
-            val intent = Intent(this@RoomDetailActivity, PostRoomFormActivity::class.java)
-            intent.putExtra("roomId", roomId)
-            intent.putExtra("postId","add")
-            startActivity(intent)
-        }
-
-        updateRoomDetailBtn.setOnClickListener {
+        updateRoomBtn.setOnClickListener {
             val intent = Intent(this@RoomDetailActivity, RoomFormActivity::class.java)
             intent.putExtra("roomId", roomId)
             startActivity(intent)
         }
-        deleteRoomDetailBtn.setOnClickListener {
+
+        deleteRoomBtn.setOnClickListener {
             database.child("rooms").child(roomId).removeValue()
             database.child("users").child(auth.uid.toString()).child("rooms").child(roomId).removeValue()
         }

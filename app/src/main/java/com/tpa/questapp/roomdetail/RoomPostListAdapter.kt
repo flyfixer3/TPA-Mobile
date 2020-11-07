@@ -36,7 +36,7 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
         class Holder : RecyclerView.ViewHolder{
 
             lateinit var userName: TextView
-            lateinit var userImg: de.hdodenhof.circleimageview.CircleImageView
+            lateinit var userImg: ImageView
             lateinit var titlePostRoom: TextView
             lateinit var descPostRoom: TextView
             lateinit var imgPostRoom: ImageView
@@ -47,7 +47,7 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
 
             constructor(rv: View) : super(rv){
                 userName = rv.findViewById(R.id.userPostName) as TextView
-                userImg = rv.findViewById(R.id.roomPostUserImg) as de.hdodenhof.circleimageview.CircleImageView
+                userImg = rv.findViewById(R.id.roomPostUserImg) as ImageView
                 titlePostRoom = rv.findViewById(R.id.titlePostRoom) as TextView
                 imgPostRoom = rv.findViewById(R.id.imgPostRoom) as ImageView
                 descPostRoom = rv.findViewById(R.id.descPostRoom) as TextView
@@ -99,7 +99,7 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
             }
 
         })
-        holder.imgPostRoom.setImageURI(at.postImg?.toUri())
+        Picasso.get().load(at.postImg).into(holder.imgPostRoom)
         holder.titlePostRoom.setText(at.postTitle)
         holder.descPostRoom.setText(at.postDesc)
         holder.commentCountPost.setText("0")
