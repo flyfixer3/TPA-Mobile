@@ -38,7 +38,6 @@ class PostDetailRoomFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val roomId:String = activity!!.intent.getStringExtra("roomId").toString()
-        Log.d("postRoomId", roomId)
         database = Firebase.database.reference
         auth = FirebaseAuth.getInstance()
 

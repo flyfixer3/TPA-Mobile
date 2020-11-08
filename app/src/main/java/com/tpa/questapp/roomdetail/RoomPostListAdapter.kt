@@ -2,16 +2,12 @@ package com.tpa.questapp.roomdetail
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -25,8 +21,6 @@ import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import com.tpa.questapp.R
 import com.tpa.questapp.model.Post
-import com.tpa.questapp.model.Room
-import com.tpa.questapp.room.RoomListAdapter
 
 class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.Holder> {
     private lateinit var database: DatabaseReference
@@ -102,7 +96,18 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
         Picasso.get().load(at.postImg).into(holder.imgPostRoom)
         holder.titlePostRoom.setText(at.postTitle)
         holder.descPostRoom.setText(at.postDesc)
-        holder.commentCountPost.setText("0")
+
+        database.child("rooms").child(at.roomId.toString()).child("posts").child(at.postId.toString()).addValueEventListener( object : ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                holder.commentCountPost.setText(snapshot.child("comments").childrenCount.toString())
+            }
+
+        })
+        
         if(auth.uid.toString().equals(at.userId)){
             holder.updateBtn.isVisible = true
             holder.deleteBtn.isVisible = true
@@ -119,7 +124,7 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
             database.child("rooms").child(at.roomId.toString()).child("posts").child(at.postId.toString()).removeValue()
         }
         holder.addComment.setOnClickListener {
-            val intent = Intent(con, commentActivity::class.java)
+            val intent = Intent(con, CommentRoomPostActivity::class.java)
             intent.putExtra("roomId", at.roomId)
             intent.putExtra("postId", at.postId)
             con.startActivity(intent)
