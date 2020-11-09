@@ -36,4 +36,8 @@
     <string name="room_following_by_you">Ruang yang kamu ikuti</string>
     <string name="title_activity_room_detail">A</string>
     <string name="action_settings">Pengaturan</string>
+    <string name="comment">Komentar</string>
+    <string name="Filter">Filter</string>
+    <string name="recent">Baru Upload</string>
+    <string name="unanswer">Belum dijawab</string>
 </resources>

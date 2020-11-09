@@ -39,33 +39,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Filter :     "
-                            android:textSize="16sp"
-                            android:gravity="center_vertical"/>
-                        <Button
-                            android:id="@+id/filterRecentBtn"
-                            android:layout_width="105dp"
-                            android:layout_height="28dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:background="#A9A9A9"
-                            android:text="Recent Upload"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="10sp" />
-                        <Button
-                            android:id="@+id/filterAlphaBtn"
-                            android:layout_width="105dp"
-                            android:layout_height="28dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginLeft="15dp"
-                            android:text="Alphabetical"
-                            android:textSize="10sp"
-                            android:background="#A9A9A9"
-                            android:textColor="@color/colorPrimary"/>
+                        <Spinner
+                            android:id="@+id/filterRoomMight"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"/>
                     </LinearLayout>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/roomMightLike"

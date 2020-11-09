@@ -1,11 +1,13 @@
 package com.tpa.questapp.roomdetail
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -18,6 +20,7 @@ import com.google.firebase.ktx.Firebase
 import com.tpa.questapp.R
 import com.tpa.questapp.model.QuestionRoom
 import com.tpa.questapp.model.Room
+import kotlinx.android.synthetic.main.activity_register_major.*
 import kotlinx.android.synthetic.main.fragment_question_detail_room.view.*
 
 /**
@@ -37,9 +40,10 @@ class QuestionDetailRoomFragment : Fragment() {
         val roomId:String = activity!!.intent.getStringExtra("roomId").toString()
         database = Firebase.database.reference
         auth = FirebaseAuth.getInstance()
+
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_question_detail_room, container, false)
-
+        loadSpinner(view.filterQuestionRoom, view.context)
         val layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
         view.questionRoomList.layoutManager = layoutManager
         questionList = arrayListOf()
@@ -53,6 +57,30 @@ class QuestionDetailRoomFragment : Fragment() {
             intent.putExtra("roomId", roomId)
             intent.putExtra("questionId","add")
             startActivity(intent)
+        }
+
+        view.filterQuestionRoom.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                Toast.makeText(view.context, view.filterQuestionRoom.selectedItemPosition.toString(), Toast.LENGTH_LONG).show()
+                if( view.filterQuestionRoom.selectedItemPosition == 1){
+                    questionList.sortWith(object: Comparator<QuestionRoom>{
+                    override fun compare(p1: QuestionRoom, p2: QuestionRoom): Int = when {
+                        p1.questionDate!! < p2.questionDate!! -> 1
+                        p1.questionDate == p2.questionDate -> 0
+                        else -> -1
+                        }
+                    })
+                    val adp = QuestionRoomListAdapter(questionList,view.context)
+                    view.questionRoomList.adapter = adp
+                }else if( view.filterQuestionRoom.selectedItem.toString().equals(R.string.unanswer)){
+
+                }
+            }
         }
 
         database.child("rooms").child(roomId).child("questionrooms").addValueEventListener(object :
@@ -107,5 +135,16 @@ class QuestionDetailRoomFragment : Fragment() {
         })
 
         return view
+    }
+
+    private fun loadSpinner(spi: Spinner, context: Context) {
+        val arrayAdapter = ArrayAdapter(
+            context,
+            android.R.layout.simple_list_item_1,
+            resources.getStringArray(
+                R.array.questionRoomFilter
+            )
+        )
+        spi.adapter = arrayAdapter
     }
 }

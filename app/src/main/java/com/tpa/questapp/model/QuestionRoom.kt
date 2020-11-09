@@ -9,9 +9,11 @@ class QuestionRoom(
     var questionTopic: String? = "",
     var question: String? = "",
     var questionImg: String? = "",
-    var roomId: String? =""
+    var roomId: String? ="",
+    var questionDate: String? = ""
 ): Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -28,6 +30,7 @@ class QuestionRoom(
         parcel?.writeString(question)
         parcel?.writeString(questionImg)
         parcel?.writeString(roomId)
+        parcel?.writeString(questionDate)
     }
 
     override fun describeContents(): Int {

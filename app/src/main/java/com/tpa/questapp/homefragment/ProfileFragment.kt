@@ -76,6 +76,7 @@ class ProfileFragment : Fragment() {
                 val countTopicInterest = snapshot.child("listTopic").childrenCount.toString()
                 val countRoomCreated = snapshot.child("rooms").childrenCount.toString()
                 val countQuestionCreated = snapshot.child("questions").childrenCount.toString()
+                val countAnswer = snapshot.child("answers").childrenCount.toString()
                 Picasso.get().load(imgUrl).into(view.imgProfile)
                 view.fullNameTxt.setText(name)
                 view.emailTxt.setText(email)
@@ -83,11 +84,12 @@ class ProfileFragment : Fragment() {
                 view.locationTxt.setText(location)
                 view.educationTxt.setText(education)
                 view.jobTxt.setText(job)
-                view.followerUserListButton.setText(countFollower + " Follower")
+                view.followerUserListButton.setText(countFollower + " Followers")
                 view.followingUserListButton.setText(countFollowing + " Following")
-                view.topicUserListButton.setText(countTopicInterest + " Topic Interest")
-                view.roomCreatedListButton.setText(countRoomCreated + " Room Created")
+                view.topicUserListButton.setText(countTopicInterest + " Topics Interest")
+                view.roomCreatedListButton.setText(countRoomCreated + " Rooms Created")
                 view.questionUserListButton.setText(countQuestionCreated + " Questions")
+                view.answerUserListButton.setText(countAnswer + " Answers")
             }
 
             override fun onCancelled(error: DatabaseError) {

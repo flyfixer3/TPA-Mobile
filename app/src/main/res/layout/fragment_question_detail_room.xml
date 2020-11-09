@@ -17,6 +17,11 @@
         android:background="@color/colorAccent"
         android:textColor="@color/colorPrimary"/>
 
+    <Spinner
+        android:id="@+id/filterQuestionRoom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

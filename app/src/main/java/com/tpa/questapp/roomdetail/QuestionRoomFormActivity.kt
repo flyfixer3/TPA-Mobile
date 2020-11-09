@@ -14,6 +14,7 @@ import com.google.firebase.ktx.Firebase
 import com.tpa.questapp.R
 import com.tpa.questapp.model.QuestionRoom
 import kotlinx.android.synthetic.main.activity_question_room_form.*
+import java.text.DateFormat
 import java.util.*
 
 class QuestionRoomFormActivity : AppCompatActivity() {
@@ -79,10 +80,11 @@ class QuestionRoomFormActivity : AppCompatActivity() {
     }
 
     private fun writeQuestionRoom(userId: String, imgQuestion: String, topicQuestion: String, question: String){
+        val questionDate = DateFormat.getDateTimeInstance().format(Date())
         if (questionId.equals("add")){
             questionId = UUID.randomUUID().toString()
         }
-        val question = QuestionRoom(questionId,userId,topicQuestion, question, imgQuestion, roomId)
+        val question = QuestionRoom(questionId,userId,topicQuestion, question, imgQuestion, roomId, questionDate)
         database.child("rooms").child(roomId).child("questionrooms").child(questionId).setValue(question)
     }
 }

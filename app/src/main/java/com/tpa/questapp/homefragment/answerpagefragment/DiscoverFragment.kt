@@ -289,32 +289,32 @@ class DiscoverFragment : Fragment() {
             startActivity(intent)
         }
 
-        view.filterRecentBtn.setOnClickListener{
-            roomList.sortWith(object: Comparator<Room>{
-                override fun compare(p1: Room, p2: Room): Int = when {
-                    p1.createRoomDate!! > p2.createRoomDate!! -> 1
-                    p1.createRoomDate == p2.createRoomDate -> 0
-                    else -> -1
-                }
-            })
-            adap = RoomListAdapter(roomList,view.context)
-            view.roomMightLike.adapter = adap
-            view.filterRecentBtn.setBackgroundColor(resources.getColor(R.color.colorAccent))
-            view.filterAlphaBtn.setBackgroundColor(resources.getColor(R.color.grey))
-        }
-        view.filterAlphaBtn.setOnClickListener {
-            roomList.sortWith(object: Comparator<Room>{
-                override fun compare(p1: Room, p2: Room): Int = when {
-                    p1.nameRoom!! > p2.nameRoom!! -> 1
-                    p1.nameRoom == p2.nameRoom -> 0
-                    else -> -1
-                }
-            })
-            adap = RoomListAdapter(roomList,view.context)
-            view.roomMightLike.adapter = adap
-            view.filterRecentBtn.setBackgroundColor(resources.getColor(R.color.grey))
-            view.filterAlphaBtn.setBackgroundColor(resources.getColor(R.color.colorAccent))
-        }
+//        view.filterRecentBtn.setOnClickListener{
+//            roomList.sortWith(object: Comparator<Room>{
+//                override fun compare(p1: Room, p2: Room): Int = when {
+//                    p1.createRoomDate!! > p2.createRoomDate!! -> 1
+//                    p1.createRoomDate == p2.createRoomDate -> 0
+//                    else -> -1
+//                }
+//            })
+//            adap = RoomListAdapter(roomList,view.context)
+//            view.roomMightLike.adapter = adap
+//            view.filterRecentBtn.setBackgroundColor(resources.getColor(R.color.colorAccent))
+//            view.filterAlphaBtn.setBackgroundColor(resources.getColor(R.color.grey))
+//        }
+//        view.filterAlphaBtn.setOnClickListener {
+//            roomList.sortWith(object: Comparator<Room>{
+//                override fun compare(p1: Room, p2: Room): Int = when {
+//                    p1.nameRoom!! > p2.nameRoom!! -> 1
+//                    p1.nameRoom == p2.nameRoom -> 0
+//                    else -> -1
+//                }
+//            })
+//            adap = RoomListAdapter(roomList,view.context)
+//            view.roomMightLike.adapter = adap
+//            view.filterRecentBtn.setBackgroundColor(resources.getColor(R.color.grey))
+//            view.filterAlphaBtn.setBackgroundColor(resources.getColor(R.color.colorAccent))
+//        }
         return view
     }
 }
