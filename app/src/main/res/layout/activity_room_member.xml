@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:text="Follower This Room :"/>
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/MemberRoomListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

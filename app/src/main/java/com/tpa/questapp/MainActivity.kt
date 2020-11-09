@@ -1,6 +1,8 @@
 package com.tpa.questapp
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -26,11 +28,23 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
 
+    val PREFS_NAME = "CurrentUser"
+    val KEY_UID = "key.uid"
+    lateinit var sp: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        init()
-        googleProvider()
+        auth = Firebase.auth
+        sp = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        if(sp.getString(KEY_UID,"").equals(auth.uid.toString())){
+            finish()
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }else{
+            init()
+            googleProvider()
+        }
     }
 
     private fun googleProvider() {
@@ -74,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                             // Get Post object and use the values to update the UI
                             if(dataSnapshot.exists()){
+                                saveUid(auth.uid.toString())
                                 startActivity(Intent(this@MainActivity, HomeActivity::class.java))
                             }else{
                                 startActivity(Intent(this@MainActivity, RegisterDetailActivity::class.java))
@@ -125,6 +140,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivtity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun saveUid(uid: String){
+        val editor:SharedPreferences.Editor = sp.edit()
+        editor.putString(KEY_UID, uid)
+        editor.apply();
     }
 
 

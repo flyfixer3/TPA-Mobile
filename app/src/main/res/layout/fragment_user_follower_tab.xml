@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".followfragment.UserFollowerTabFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".followfragment.UserFollowerTabFragment"
+    android:background="@color/colorPrimary">
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/followerListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+        android:id="@+id/noFollowerImg"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:layout_constraintBottom_toTopOf="@+id/noFollowerTxt"
+        android:src="@drawable/empty_follow"/>
+    <TextView
+        android:id="@+id/noFollowerTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No Follower"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/noFollowerImg"
+        android:gravity="center" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -25,6 +26,8 @@ class UserFollowingTabFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_user_following_tab, container, false)
         userList = arrayListOf()
 
+        view.noFollowingImg.isVisible = false
+        view.noFollowingTxt.isVisible = false
         val layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
         view.followingListView.layoutManager = layoutManager
         database.addValueEventListener(object  : ValueEventListener{
@@ -59,6 +62,10 @@ class UserFollowingTabFragment : Fragment() {
                             allUserList.add(user!!)
                         }
                     }
+                }
+                if (allUserList.isEmpty()){
+                    view.noFollowingImg.isVisible = true
+                    view.noFollowingTxt.isVisible = true
                 }
                 view.followingListView.adapter = ListFollowingAdapter(allUserList,view.context)
             }

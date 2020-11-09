@@ -2,7 +2,9 @@ package com.tpa.questapp.homefragment
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +34,11 @@ class ProfileFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var googleSignInClient: GoogleSignInClient
+
+    val PREFS_NAME = "CurrentUser"
+    val KEY_UID = "key.uid"
+    lateinit var sp: SharedPreferences
+
 //    var context: Activity? = null
 
     @SuppressLint("ResourceType")
@@ -41,7 +48,9 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 //        context = getActivity();
+
         val view =  inflater.inflate(R.layout.fragment_profile, container, false)
+        sp = activity!!.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         auth = FirebaseAuth.getInstance()
         val userId = auth.currentUser!!.uid
         val email = auth.currentUser!!.email.toString()
@@ -87,6 +96,7 @@ class ProfileFragment : Fragment() {
         })
         view.logoutTxt.setOnClickListener{
             googleSignInClient.signOut()
+            clearData()
             val i = Intent(context, MainActivity::class.java)
             this.startActivity(i)
             activity!!.finish()
@@ -121,5 +131,11 @@ class ProfileFragment : Fragment() {
             this.startActivity(i)
         }
         return view
+    }
+
+    private fun clearData(){
+        val editor: SharedPreferences.Editor = sp.edit()
+        editor.clear()
+        editor.apply()
     }
 }
