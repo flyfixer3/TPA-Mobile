@@ -33,7 +33,7 @@
                 android:layout_marginTop="5dp"
                 android:textColor="@color/colorAccent"
                 android:textSize="18sp"
-                android:text="upload"
+                android:text="@string/upload"
                 android:textStyle="bold"/>
         </LinearLayout>
     </RelativeLayout>
@@ -45,7 +45,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Your Spesific Topic">
+            android:hint="@string/your_spesific_topic">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/topicRoomField"
@@ -57,7 +57,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Your Question">
+            android:hint="@string/your_question">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/questionRoomField"
@@ -70,7 +70,7 @@
             android:id="@+id/addQuestionRoomBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create Question"
+            android:text="@string/create_question"
             android:background="@color/colorPrimaryDark"
             android:textColor="@color/colorPrimary"/>
     </LinearLayout>

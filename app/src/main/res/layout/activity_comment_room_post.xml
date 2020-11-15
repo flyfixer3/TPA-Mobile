@@ -13,7 +13,7 @@
         android:id="@+id/topComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Your Comment"
+        android:hint="@string/your_comment"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -26,7 +26,7 @@
         android:id="@+id/addCommentForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Comment"
+        android:text="@string/add_comment"
         android:layout_marginBottom="15dp"
         app:layout_constraintTop_toBottomOf="@+id/topComment"/>
 

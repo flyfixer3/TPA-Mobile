@@ -22,7 +22,7 @@
         android:id="@+id/noRoomTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No Room Created By You"
+        android:text="@string/no_room_created_by_you"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/noRoomImg"
         android:gravity="center"/>

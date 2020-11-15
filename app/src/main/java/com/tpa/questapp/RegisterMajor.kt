@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -33,6 +34,8 @@ class RegisterMajor : AppCompatActivity() {
         setContentView(R.layout.activity_register_major)
         sp = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         init()
+        noTopicListTxt.isVisible = false
+        noTopicListImg.isVisible = false
         auth = Firebase.auth
         database = Firebase.database.reference
     }
@@ -55,6 +58,8 @@ class RegisterMajor : AppCompatActivity() {
                     loadTopicMN()
                 }else{
                     topicListView.adapter = null
+                    noTopicListTxt.isVisible = true
+                    noTopicListImg.isVisible = true
                 }
             }
         }

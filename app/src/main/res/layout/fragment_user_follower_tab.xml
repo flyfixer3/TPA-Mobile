@@ -23,7 +23,7 @@
         android:id="@+id/noFollowerTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No Follower"
+        android:text="@string/no_follower"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/noFollowerImg"
         android:gravity="center" />

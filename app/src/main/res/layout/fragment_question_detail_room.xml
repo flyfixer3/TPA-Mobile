@@ -13,14 +13,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Add Question"
+        android:text="@string/add_question"
         android:background="@color/colorAccent"
         android:textColor="@color/colorPrimary"/>
 
-    <Spinner
-        android:id="@+id/filterQuestionRoom"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="wrap_content"
+        android:background="#4FF49292"
+        android:layout_margin="10dp">
+        <Spinner
+            android:id="@+id/filterQuestionRoom"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/colorAccent"/>
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

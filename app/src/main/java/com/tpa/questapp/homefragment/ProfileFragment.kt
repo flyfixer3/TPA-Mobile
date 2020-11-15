@@ -84,12 +84,12 @@ class ProfileFragment : Fragment() {
                 view.locationTxt.setText(location)
                 view.educationTxt.setText(education)
                 view.jobTxt.setText(job)
-                view.followerUserListButton.setText(countFollower + " Followers")
-                view.followingUserListButton.setText(countFollowing + " Following")
-                view.topicUserListButton.setText(countTopicInterest + " Topics Interest")
-                view.roomCreatedListButton.setText(countRoomCreated + " Rooms Created")
-                view.questionUserListButton.setText(countQuestionCreated + " Questions")
-                view.answerUserListButton.setText(countAnswer + " Answers")
+                view.followerUserListButton.setText(countFollower + " " + resources.getString(R.string.follower))
+                view.followingUserListButton.setText(countFollowing + " " + resources.getString(R.string.following))
+                view.topicUserListButton.setText(countTopicInterest + " " + resources.getString(R.string.topicInterest))
+                view.roomCreatedListButton.setText(countRoomCreated + " " + resources.getString(R.string.createdRoom))
+                view.questionUserListButton.setText(countQuestionCreated + " " + resources.getString(R.string.question))
+                view.answerUserListButton.setText(countAnswer + " " + resources.getString(R.string.answer))
             }
 
             override fun onCancelled(error: DatabaseError) {

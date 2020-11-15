@@ -90,10 +90,8 @@ class PostDetailRoomFragment : Fragment() {
                     val post = h.getValue(Post::class.java)
                     postList.add(post!!)
                 }
-                if (postList.isEmpty()){
-                    view.noPostTxt.isVisible = true
-                    view.noPostImg.isVisible = true
-                }
+                    view.noPostTxt.isVisible = postList.isEmpty()
+                    view.noPostImg.isVisible = postList.isEmpty()
                 val adp = RoomPostListAdapter(postList,view.context)
                 view.postRoomList.adapter = adp
             }

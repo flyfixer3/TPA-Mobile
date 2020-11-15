@@ -28,14 +28,12 @@ class RoomListAdapter : RecyclerView.Adapter<RoomListAdapter.Companion.Holder>{
             lateinit var roomName: TextView
             lateinit var roomImg: de.hdodenhof.circleimageview.CircleImageView
             lateinit var roomTopic: TextView
-            lateinit var unfollowBtn: Button
             lateinit var followBtn: Button
 
             constructor(rv: View) : super(rv){
                 roomName = rv.findViewById(R.id.roomNameList) as TextView
                 roomImg = rv.findViewById(R.id.roomListImg) as de.hdodenhof.circleimageview.CircleImageView
                 roomTopic = rv.findViewById(R.id.roomTopicList) as TextView
-                unfollowBtn = rv.findViewById(R.id.unfollowDiscoverBtn) as Button
                 followBtn = rv.findViewById(R.id.followDiscoverBtn) as Button
             }
         }
@@ -88,19 +86,19 @@ class RoomListAdapter : RecyclerView.Adapter<RoomListAdapter.Companion.Holder>{
                 for (h in snapshot.child("users").child(auth.uid.toString()).child("followrooms").children){
                     val room = h.getValue(Room::class.java)
                     if(room!!.roomId.equals(at.roomId)){
-                        holder.followBtn.setText("unfollow")
+                        holder.followBtn.setText(con.resources.getString(R.string.unfollow))
                     }
                 }
             }
 
         })
         holder!!.followBtn.setOnClickListener {
-            if(holder.followBtn.text.equals("follow")){
-                holder.followBtn.setText("unfollow")
+            if(holder.followBtn.text.equals(con.resources.getString(R.string.follow))){
+                holder.followBtn.setText(con.resources.getString(R.string.unfollow))
                 database.child("users").child(auth.uid.toString()).child("followrooms").child(at.roomId.toString()).setValue(at)
                 database.child("rooms").child(at.roomId.toString()).child("followers").child(auth.uid.toString()).setValue(auth.uid.toString())
             }else{
-                holder.followBtn.setText("follow")
+                holder.followBtn.setText(con.resources.getString(R.string.follow))
                 database.child("users").child(auth.uid.toString()).child("followrooms").child(at.roomId.toString()).removeValue()
                 database.child("rooms").child(at.roomId.toString()).child("followers").child(auth.uid.toString()).removeValue()
             }
