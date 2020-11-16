@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -117,10 +116,6 @@ class DiscoverFragment : Fragment() {
             }
 
             override fun onItemClicked(view: View, room: Room) {
-                Toast.makeText(view.context,
-                    "Room ${room.roomId} berhasil di klik",
-                    Toast.LENGTH_SHORT
-                ).show()
                 val intent = Intent(view.context, RoomDetailActivity::class.java)
                 intent.putExtra("roomId", room.roomId)
                 startActivity(intent)
@@ -213,10 +208,6 @@ class DiscoverFragment : Fragment() {
             }
 
             override fun onItemClicked(view: View, room: Room) {
-                Toast.makeText(view.context,
-                    "Room ${room.roomId} berhasil di klik",
-                    Toast.LENGTH_SHORT
-                ).show()
                 val intent = Intent(view.context, RoomDetailActivity::class.java)
                 intent.putExtra("roomId", room.roomId)
                 startActivity(intent)
@@ -459,10 +450,6 @@ class DiscoverFragment : Fragment() {
             }
 
             override fun onItemClicked(view: View, room: Room) {
-                Toast.makeText(view.context,
-                    "Room ${room.roomId} berhasil di klik",
-                    Toast.LENGTH_SHORT
-                ).show()
                 val intent = Intent(view.context, RoomDetailActivity::class.java)
                 intent.putExtra("roomId", room.roomId)
                 startActivity(intent)
@@ -517,10 +504,6 @@ class DiscoverFragment : Fragment() {
             }
 
             override fun onItemClicked(view: View, room: Room) {
-                Toast.makeText(view.context,
-                    "Room ${room.roomId} berhasil di klik",
-                    Toast.LENGTH_SHORT
-                ).show()
                 val intent = Intent(view.context, RoomDetailActivity::class.java)
                 intent.putExtra("roomId", room.roomId)
                 startActivity(intent)

@@ -146,4 +146,15 @@
     <string name="owners">Owners :</string>
     <string name="follower_this_room">Follower This Room :</string>
     <string name="room_description">Room Description</string>
+    <string name="post">Post</string>
+    <string name="PostConfirm">Delete Post Confirmation</string>
+    <string name="DeletePost">Are you sure delete this post?</string>
+    <string name="ok">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="RoomConfirm">Delete Room Confirmation</string>
+    <string name="RoomDelete">Are you sure delete this room?</string>
+    <string name="CommentRoom">Delete Comment Confirmation</string>
+    <string name="CommentDelete">Are you sure delete this comment?</string>
+    <string name="QuestionConfirmation">Delete Question Confirmation</string>
+    <string name="QuestionDelete">Are you sure delete this question?</string>
 </resources>

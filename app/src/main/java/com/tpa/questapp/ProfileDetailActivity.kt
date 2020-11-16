@@ -15,7 +15,7 @@ class ProfileDetailActivity : AppCompatActivity() {
 
     private fun init() {
         val pos = intent.getIntExtra("tabDetailProfile",0)
-        viewpager_profiledetail.adapter = ProfileDetailPagerAdapter(supportFragmentManager)
+        viewpager_profiledetail.adapter = ProfileDetailPagerAdapter(supportFragmentManager,this)
         viewpager_profiledetail.setCurrentItem(pos)
     }
 }

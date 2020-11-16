@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -55,7 +56,7 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
 
     var list: ArrayList<Post> = arrayListOf()
 
-    lateinit var con: Context
+    var con: Context
 
     constructor(list: ArrayList<Post>, con: Context) : super() {
         this.list = list
@@ -93,7 +94,11 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
             }
 
         })
-        Picasso.get().load(at.postImg).into(holder.imgPostRoom)
+
+        if (!(at.postImg.equals("empty"))){
+            Picasso.get().load(at.postImg).into(holder.imgPostRoom)
+        }
+
         holder.titlePostRoom.setText(at.postTitle)
         holder.descPostRoom.setText(at.postDesc)
 
@@ -101,7 +106,6 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
             override fun onDataChange(snapshot: DataSnapshot) {
                 holder.commentCountPost.setText(snapshot.child("comments").childrenCount.toString())
             }
@@ -112,6 +116,7 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
             holder.updateBtn.isVisible = true
             holder.deleteBtn.isVisible = true
         }
+
         holder.updateBtn.setOnClickListener {
             Toast.makeText(con,"update",Toast.LENGTH_LONG).show()
             val intent = Intent(con, PostRoomFormActivity::class.java)
@@ -121,8 +126,18 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
         }
 
         holder.deleteBtn.setOnClickListener {
-            database.child("rooms").child(at.roomId.toString()).child("posts").child(at.postId.toString()).removeValue()
+            val builder = AlertDialog.Builder(con)
+            builder.setTitle(con.resources.getString(R.string.PostConfirm))
+            builder.setMessage(con.resources.getString(R.string.DeletePost))
+            builder.setPositiveButton(con.resources.getString(R.string.cancel)){dialogInterface, which ->
+            }
+            builder.setNegativeButton(con.resources.getString(R.string.ok)){dialogInterface, which ->
+                database.child("rooms").child(at.roomId.toString()).child("posts").child(at.postId.toString()).removeValue()
+            }
+            val alertDialog: AlertDialog = builder.create()
+            alertDialog.show()
         }
+
         holder.addComment.setOnClickListener {
             val intent = Intent(con, CommentRoomPostActivity::class.java)
             intent.putExtra("roomId", at.roomId)

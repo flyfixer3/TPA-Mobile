@@ -76,4 +76,15 @@
     <string name="owners">Pemilik Ruang:</string>
     <string name="follower_this_room">Pengikut Ruang:</string>
     <string name="room_description">Deskripsi Ruang</string>
+    <string name="post">Postingan</string>
+    <string name="PostConfirm">Konfirmasi Hapus Postingan</string>
+    <string name="DeletePost">Apakah Anda yakin menghapus postingan ini?</string>
+    <string name="ok">Ya</string>
+    <string name="cancel">Batal</string>
+    <string name="RoomConfirm">Konfirmasi Hapus Ruang</string>
+    <string name="RoomDelete">Apakah Anda yakin menghapus ruang ini?</string>
+    <string name="CommentRoom">Konfirmasi Hapus Komentar</string>
+    <string name="CommentDelete">Apakah Anda yakin menghapus komentar ini?</string>
+    <string name="QuestionConfirmation">Konfirmasi Hapus Pertanyaan</string>
+    <string name="QuestionDelete">Apakah Anda yakin menghapus pertanyaan ini?</string>
 </resources>

@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -103,7 +104,7 @@ class RoomDetailActivity : AppCompatActivity() {
             }
 
         }
-        viewpager_detailroom.adapter = RoomDetailPagerAdapter(supportFragmentManager)
+        viewpager_detailroom.adapter = RoomDetailPagerAdapter(supportFragmentManager, this)
 
         showMemberBtn.setOnClickListener {
             val intent = Intent(this@RoomDetailActivity, RoomMemberActivity::class.java)
@@ -118,8 +119,16 @@ class RoomDetailActivity : AppCompatActivity() {
         }
 
         deleteRoomBtn.setOnClickListener {
-            database.child("rooms").child(roomId).removeValue()
-            database.child("users").child(auth.uid.toString()).child("rooms").child(roomId).removeValue()
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle(this.resources.getString(R.string.RoomConfirm))
+            builder.setMessage(this.resources.getString(R.string.RoomDelete))
+            builder.setPositiveButton(this.resources.getString(R.string.cancel)){dialogInterface, which -> }
+            builder.setNegativeButton(this.resources.getString(R.string.ok)){dialogInterface, which ->
+                database.child("rooms").child(roomId).removeValue()
+                database.child("users").child(auth.uid.toString()).child("rooms").child(roomId).removeValue()
+            }
+            val alertDialog: AlertDialog = builder.create()
+            alertDialog.show()
         }
     }
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -110,8 +111,9 @@ class QuestionRoomListAdapter: RecyclerView.Adapter<QuestionRoomListAdapter.Comp
 
         })
         holder.commentCountQuestion.setText("0")
-        Picasso.get().load(at.questionImg).into(holder.imgQuestion)
-
+        if (!(at.questionImg.equals("empty"))){
+            Picasso.get().load(at.questionImg).into(holder.imgQuestion)
+        }
         if(auth.uid.toString().equals(at.userId)){
             holder.updateBtn.isVisible = true
             holder.deleteBtn.isVisible = true
@@ -126,7 +128,15 @@ class QuestionRoomListAdapter: RecyclerView.Adapter<QuestionRoomListAdapter.Comp
         }
 
         holder.deleteBtn.setOnClickListener {
-            database.child("rooms").child(at.roomId.toString()).child("questionrooms").child(at.questionRoomId.toString()).removeValue()
+            val builder = AlertDialog.Builder(con)
+            builder.setTitle(con.resources.getString(R.string.QuestionConfirmation))
+            builder.setMessage(con.resources.getString(R.string.QuestionDelete))
+            builder.setPositiveButton(con.resources.getString(R.string.cancel)){dialogInterface, which -> }
+            builder.setNegativeButton(con.resources.getString(R.string.ok)){dialogInterface, which ->
+                database.child("rooms").child(at.roomId.toString()).child("questionrooms").child(at.questionRoomId.toString()).removeValue()
+            }
+            val alertDialog: AlertDialog = builder.create()
+            alertDialog.show()
         }
 
         holder.addComment.setOnClickListener {

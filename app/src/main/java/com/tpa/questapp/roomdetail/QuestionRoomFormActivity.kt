@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 import com.tpa.questapp.R
 import com.tpa.questapp.model.QuestionRoom
@@ -30,7 +31,7 @@ class QuestionRoomFormActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var questionId: String
     private lateinit var roomId: String
-    lateinit var filepath : Uri
+    private var filepath : Uri = Uri.EMPTY
 
     companion object{
         private val PICK_IMAGE_Code = 1000
@@ -39,9 +40,6 @@ class QuestionRoomFormActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK){
             filepath = data!!.data!!
-            Log.d("123", filepath.toString())
-            var bitmap: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filepath)
-//            roomPostFormImg.setImageBitmap(bitmap)
             Picasso.get().load(filepath).into(roomQuestionFormImg)
         }
     }
@@ -69,10 +67,10 @@ class QuestionRoomFormActivity : AppCompatActivity() {
                     topic.isEmpty() -> topicRoomField.error = "The spesific topic field must be filled"
                     question.length > 250 -> questionRoomField.error = "The question field maks. 250 characters"
                     else -> {
-                        val imgDef =
-                            "https://firebasestorage.googleapis.com/v0/b/fir-authquestapp.appspot.com/o/messageImage_1604993851101.jpg?alt=media&token=3609c023-18e0-44d6-9382-1b9ad43451f4"
-                        writeQuestionRoom(auth.uid.toString(), imgDef, topic, question)
+                        val id = UUID.randomUUID().toString()
+                        upload("questionroom", id, filepath, auth.uid.toString(), topic, question)
                         Toast.makeText(this, "Success Add Question", Toast.LENGTH_LONG).show()
+                        this.finish()
                     }
                 }
             }
@@ -98,10 +96,10 @@ class QuestionRoomFormActivity : AppCompatActivity() {
                     topic.isEmpty() -> topicRoomField.error = "The spesific topic field must be filled"
                     question.length > 250 -> questionRoomField.error = "The question field maks. 250 characters"
                     else -> {
-                        val imgDef =
-                            "https://firebasestorage.googleapis.com/v0/b/fir-authquestapp.appspot.com/o/post1.jpg?alt=media&token=5a221865-ba4c-40d7-9cb5-b1650ba58a2b"
-                        writeQuestionRoom(auth.uid.toString(), imgDef, topic, question)
+                        val id = UUID.randomUUID().toString()
+                        upload("questionroom", id, filepath, auth.uid.toString(), topic, question)
                         Toast.makeText(this, "Success Update Question", Toast.LENGTH_LONG).show()
+                        this.finish()
                     }
                 }
             }
@@ -115,5 +113,24 @@ class QuestionRoomFormActivity : AppCompatActivity() {
         }
         val question = QuestionRoom(questionId,userId,topicQuestion, question, imgQuestion, roomId, questionDate)
         database.child("rooms").child(roomId).child("questionrooms").child(questionId).setValue(question)
+    }
+
+
+    private val TAG = "v"
+    val storage = Firebase.storage.reference
+
+    fun upload(folder: String, nameFile: String, ImageUri: Uri, userId: String, topicQuestion: String, question: String) {
+        val uploadTask = storage.child(folder+"/"+nameFile+".jpg").putFile(ImageUri)
+        uploadTask.addOnSuccessListener {
+            val ref =  storage.child(folder+"/"+nameFile+".jpg")
+            ref.downloadUrl.addOnCompleteListener {
+                val downloadUri = it.result.toString()
+                writeQuestionRoom(userId, downloadUri, topicQuestion, question)
+            }
+            Log.e(TAG, "Success")
+        }.addOnFailureListener {
+            Log.e(TAG,"failed")
+            writeQuestionRoom(userId, "empty", topicQuestion, question)
+        }
     }
 }

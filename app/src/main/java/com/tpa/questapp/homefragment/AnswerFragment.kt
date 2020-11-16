@@ -22,7 +22,7 @@ class AnswerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_answer, container, false)
-        view.viewpager_main.adapter = MyPagerAdapter(childFragmentManager)
+        view.viewpager_main.adapter = MyPagerAdapter(childFragmentManager, view.context)
         view.tabs_main.setupWithViewPager(view.viewpager_main)
         // Inflate the layout for this fragment
         return view

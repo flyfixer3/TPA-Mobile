@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -90,7 +91,15 @@ class CommentRoomPostListAdapter : RecyclerView.Adapter<CommentRoomPostListAdapt
         }
         holder.comment.setText(at.comment)
         holder.deleteBtn.setOnClickListener {
-            database.child("rooms").child(at.roomId.toString()).child("posts").child(at.postId.toString()).child("comments").child(at.commentId.toString()).removeValue()
+            val builder = AlertDialog.Builder(con)
+            builder.setTitle(con.resources.getString(R.string.CommentRoom))
+            builder.setMessage(con.resources.getString(R.string.CommentDelete))
+            builder.setPositiveButton(con.resources.getString(R.string.cancel)){dialogInterface, which -> }
+            builder.setNegativeButton(con.resources.getString(R.string.ok)){dialogInterface, which ->
+                database.child("rooms").child(at.roomId.toString()).child("posts").child(at.postId.toString()).child("comments").child(at.commentId.toString()).removeValue()
+            }
+            val alertDialog: AlertDialog = builder.create()
+            alertDialog.show()
         }
         holder.updateBtn.setOnClickListener {
             val intent = Intent(con, CommentRoomPostActivity::class.java)

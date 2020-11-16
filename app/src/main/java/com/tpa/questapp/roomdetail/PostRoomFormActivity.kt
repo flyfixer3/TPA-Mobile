@@ -20,12 +20,14 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 import com.tpa.questapp.R
 import com.tpa.questapp.model.Post
 import kotlinx.android.synthetic.main.activity_post_room_form.*
 import java.util.*
 import com.tpa.questapp.FirebaseStorageManager
+import kotlinx.coroutines.android.awaitFrame
 
 
 class PostRoomFormActivity : AppCompatActivity() {
@@ -34,8 +36,7 @@ class PostRoomFormActivity : AppCompatActivity() {
     private lateinit var postId: String
     private lateinit var roomId: String
 
-    lateinit var filepath : Uri
-    lateinit var mStorageRef: StorageReference
+    private var filepath : Uri = Uri.EMPTY
     companion object{
         val PICK_IMAGE_Code = 1000
     }
@@ -43,9 +44,6 @@ class PostRoomFormActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK){
             filepath = data!!.data!!
-            Log.d("123", filepath.toString())
-            var bitmap: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filepath)
-//            roomPostFormImg.setImageBitmap(bitmap)
             Picasso.get().load(filepath).into(roomPostFormImg)
         }
     }
@@ -67,9 +65,10 @@ class PostRoomFormActivity : AppCompatActivity() {
                     titlePost.length < 5 -> roomPostTitleField!!.error = "The title post field must equals or more 5 characters"
                     descPost.length > 250 -> roomPostDescriptionField!!.error = "The description field maks. 250 characters"
                     else -> {
-                        val imgDef="https://firebasestorage.googleapis.com/v0/b/fir-authquestapp.appspot.com/o/messageImage_1604993851101.jpg?alt=media&token=3609c023-18e0-44d6-9382-1b9ad43451f4"
-                        writePost(auth.uid.toString(), imgDef, titlePost, descPost)
+                        val id = UUID.randomUUID().toString()
+                        upload("postroom",id, filepath, auth.uid.toString(), titlePost, descPost)
                         Toast.makeText(this, "Success Add Post", Toast.LENGTH_LONG).show()
+                        this.finish()
                     }
                 }
             }
@@ -78,7 +77,6 @@ class PostRoomFormActivity : AppCompatActivity() {
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }
-
                 override fun onDataChange(snapshot: DataSnapshot) {
                     roomPostTitleField.setText(snapshot.child("postTitle").value.toString().trim())
                     roomPostDescriptionField.setText(snapshot.child("postDesc").value.toString().trim())
@@ -93,9 +91,10 @@ class PostRoomFormActivity : AppCompatActivity() {
                     titlePost.length < 5 -> roomPostTitleField!!.error = "The title post must equals or more 3 characters"
                     descPost.length > 250 -> roomPostDescriptionField!!.error = "The description maks. 250 characters"
                     else -> {
-                        val imgDef="https://firebasestorage.googleapis.com/v0/b/fir-authquestapp.appspot.com/o/messageImage_1604993851101.jpg?alt=media&token=3609c023-18e0-44d6-9382-1b9ad43451f4"
-                        writePost(auth.uid.toString(), imgDef, titlePost, descPost)
+                        val id = UUID.randomUUID().toString()
+                        upload("postroom",id, filepath, auth.uid.toString(), titlePost, descPost)
                         Toast.makeText(this, "Success Update Post", Toast.LENGTH_LONG).show()
+                        this.finish()
                     }
                 }
             }
@@ -109,21 +108,29 @@ class PostRoomFormActivity : AppCompatActivity() {
         }
     }
 
-//    private fun uploadFile() {
-//        if(filepath != null){
-//
-//
-//            var imgRef: StorageReference = FirebaseStorage.getInstance().reference.child("images/pic.jpg")
-//            imgRef
-//        }
-//    }
-
     private fun writePost(userId: String, imgPost: String, titlePost: String, descPost: String){
-
         if (postId.equals("add")){
             postId = UUID.randomUUID().toString()
         }
         val post = Post(postId, userId, titlePost, descPost, imgPost, roomId)
         database.child("rooms").child(roomId).child("posts").child(postId).setValue(post)
+    }
+
+    private val TAG = "v"
+    val storage = Firebase.storage.reference
+
+    fun upload(folder: String, nameFile: String, ImageUri: Uri, userId: String, titlePost: String, descPost: String) {
+        val uploadTask = storage.child(folder+"/"+nameFile+".jpg").putFile(ImageUri)
+        uploadTask.addOnSuccessListener {
+            val ref =  storage.child(folder+"/"+nameFile+".jpg")
+            ref.downloadUrl.addOnCompleteListener {
+                val downloadUri = it.result.toString()
+                writePost(userId, downloadUri, titlePost, descPost)
+            }
+            Log.e(TAG, "Success")
+        }.addOnFailureListener {
+            Log.e(TAG,"failed")
+            writePost(userId, "empty", titlePost, descPost)
+        }
     }
 }
