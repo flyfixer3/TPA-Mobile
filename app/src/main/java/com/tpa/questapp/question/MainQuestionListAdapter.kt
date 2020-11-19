@@ -120,7 +120,7 @@ class MainQuestionListAdapter : RecyclerView.Adapter<MainQuestionListAdapter.Com
                 }
             }
         })
-        database.child("question").child(at.questionId.toString()).child("answer").orderByChild("upvote").limitToFirst(1).addValueEventListener(object : ValueEventListener{
+        database.child("questions").child(at.questionId.toString()).child("answers").orderByChild("upvote").limitToFirst(1).addValueEventListener(object : ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
@@ -136,7 +136,7 @@ class MainQuestionListAdapter : RecyclerView.Adapter<MainQuestionListAdapter.Com
                 }
             }
         })
-        database.child("question").child(at.questionId.toString()).child("answer").addValueEventListener(object : ValueEventListener{
+        database.child("questions").child(at.questionId.toString()).child("answers").addValueEventListener(object : ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }

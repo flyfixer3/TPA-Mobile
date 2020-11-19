@@ -31,12 +31,12 @@ class Ticket(
             return 0
         }
 
-        companion object CREATOR : Parcelable.Creator<Question> {
-            override fun createFromParcel(parcel: Parcel): Question {
-                return Question(parcel)
+        companion object CREATOR : Parcelable.Creator<Ticket> {
+            override fun createFromParcel(parcel: Parcel): Ticket {
+                return Ticket(parcel)
             }
 
-            override fun newArray(size: Int): Array<Question?> {
+            override fun newArray(size: Int): Array<Ticket?> {
                 return arrayOfNulls(size)
             }
         }

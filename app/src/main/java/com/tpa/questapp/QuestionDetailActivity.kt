@@ -19,8 +19,12 @@ import com.tpa.questapp.model.Ticket
 import com.tpa.questapp.question.AnswerQuestionListAdapter
 import com.tpa.questapp.question.MainQuestionListAdapter
 import kotlinx.android.synthetic.main.activity_question_detail.*
+import kotlinx.android.synthetic.main.activity_question_detail.picture_path
+import kotlinx.android.synthetic.main.activity_question_detail.txtUserName
+import kotlinx.android.synthetic.main.activity_question_detail.txt_question
 import kotlinx.android.synthetic.main.activity_view_all_room.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.list_post.*
 
 class QuestionDetailActivity : AppCompatActivity(), RecycleViewClickListener {
     private lateinit var auth: FirebaseAuth
@@ -51,28 +55,18 @@ class QuestionDetailActivity : AppCompatActivity(), RecycleViewClickListener {
 
         })
 
-        txt_question.text = ticket.question
-        txt_question_date.text = ticket.createdDate
+        txt_question.text = ticket!!.question
+        txt_question_date.text = ticket!!.createdDate
 
 
-        database.child("questions").child("answers").orderByChild("upvote").addValueEventListener(object: ValueEventListener {
+        database.child("questions").child(ticket.questionId.toString()).child("answers").orderByChild("upvote").addValueEventListener(object: ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
 
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
-
-//                    var td = snapshot!!.value as HashMap<String,Any>
-//                    for(key in td.keys){
-//                        var post = td[key] as HashMap<String,Any>
-//                        list?.add(
-//                            Ticket(key,post["userId"] as String, post["question"] as String ,post["topic"] as String,post["createdDate"] as String)
-//                        )
-//                    }
-
                     for (h in snapshot.children){
-
                         list.add(Answer(h.key,
                             h.child("userId").value.toString(),
                             h.child("answer").value.toString(),

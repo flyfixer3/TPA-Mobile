@@ -9,13 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
         <activity android:name=".QuestionDetailActivity"></activity>
-=======
         <activity android:name=".roomdetail.QuestionRoomPostActivity"></activity>
         <activity android:name=".roomdetail.commentActivity" />
         <activity android:name=".roomdetail.PostRoomFormActivity" />
->>>>>>> 4fdb969b86b6602f54095a9755b9f31ec6f6143c
         <activity android:name=".room.ViewAllRoomActivity" />
         <activity android:name=".roomdetail.RoomMemberActivity" />
         <activity
