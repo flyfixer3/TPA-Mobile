@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Owners :"/>
+        android:text="@string/owners"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -72,9 +72,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Follower This Room :"/>
+        android:text="@string/follower_this_room"/>
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/MemberRoomListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

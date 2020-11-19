@@ -2,16 +2,13 @@ package com.tpa.questapp.roomdetail
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.net.toUri
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -25,8 +22,6 @@ import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import com.tpa.questapp.R
 import com.tpa.questapp.model.Post
-import com.tpa.questapp.model.Room
-import com.tpa.questapp.room.RoomListAdapter
 
 class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.Holder> {
     private lateinit var database: DatabaseReference
@@ -36,7 +31,7 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
         class Holder : RecyclerView.ViewHolder{
 
             lateinit var userName: TextView
-            lateinit var userImg: de.hdodenhof.circleimageview.CircleImageView
+            lateinit var userImg: ImageView
             lateinit var titlePostRoom: TextView
             lateinit var descPostRoom: TextView
             lateinit var imgPostRoom: ImageView
@@ -47,7 +42,7 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
 
             constructor(rv: View) : super(rv){
                 userName = rv.findViewById(R.id.userPostName) as TextView
-                userImg = rv.findViewById(R.id.roomPostUserImg) as de.hdodenhof.circleimageview.CircleImageView
+                userImg = rv.findViewById(R.id.roomPostUserImg) as ImageView
                 titlePostRoom = rv.findViewById(R.id.titlePostRoom) as TextView
                 imgPostRoom = rv.findViewById(R.id.imgPostRoom) as ImageView
                 descPostRoom = rv.findViewById(R.id.descPostRoom) as TextView
@@ -61,7 +56,7 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
 
     var list: ArrayList<Post> = arrayListOf()
 
-    lateinit var con: Context
+    var con: Context
 
     constructor(list: ArrayList<Post>, con: Context) : super() {
         this.list = list
@@ -99,14 +94,29 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
             }
 
         })
-        holder.imgPostRoom.setImageURI(at.postImg?.toUri())
+
+        if (!(at.postImg.equals("empty"))){
+            Picasso.get().load(at.postImg).into(holder.imgPostRoom)
+        }
+
         holder.titlePostRoom.setText(at.postTitle)
         holder.descPostRoom.setText(at.postDesc)
-        holder.commentCountPost.setText("0")
+
+        database.child("rooms").child(at.roomId.toString()).child("posts").child(at.postId.toString()).addValueEventListener( object : ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+            override fun onDataChange(snapshot: DataSnapshot) {
+                holder.commentCountPost.setText(snapshot.child("comments").childrenCount.toString())
+            }
+
+        })
+        
         if(auth.uid.toString().equals(at.userId)){
             holder.updateBtn.isVisible = true
             holder.deleteBtn.isVisible = true
         }
+
         holder.updateBtn.setOnClickListener {
             Toast.makeText(con,"update",Toast.LENGTH_LONG).show()
             val intent = Intent(con, PostRoomFormActivity::class.java)
@@ -116,10 +126,20 @@ class RoomPostListAdapter : RecyclerView.Adapter<RoomPostListAdapter.Companion.H
         }
 
         holder.deleteBtn.setOnClickListener {
-            database.child("rooms").child(at.roomId.toString()).child("posts").child(at.postId.toString()).removeValue()
+            val builder = AlertDialog.Builder(con)
+            builder.setTitle(con.resources.getString(R.string.PostConfirm))
+            builder.setMessage(con.resources.getString(R.string.DeletePost))
+            builder.setPositiveButton(con.resources.getString(R.string.cancel)){dialogInterface, which ->
+            }
+            builder.setNegativeButton(con.resources.getString(R.string.ok)){dialogInterface, which ->
+                database.child("rooms").child(at.roomId.toString()).child("posts").child(at.postId.toString()).removeValue()
+            }
+            val alertDialog: AlertDialog = builder.create()
+            alertDialog.show()
         }
+
         holder.addComment.setOnClickListener {
-            val intent = Intent(con, commentActivity::class.java)
+            val intent = Intent(con, CommentRoomPostActivity::class.java)
             intent.putExtra("roomId", at.roomId)
             intent.putExtra("postId", at.postId)
             con.startActivity(intent)

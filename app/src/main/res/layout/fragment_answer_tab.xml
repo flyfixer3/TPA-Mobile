@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".homefragment.answerpagefragment.AnswerTabFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".homefragment.answerpagefragment.AnswerTabFragment"
+    android:background="@color/colorPrimary">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userAnswerListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Answer Section" />
-
-</FrameLayout>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+        android:id="@+id/noAnswerUserImg"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:layout_constraintBottom_toTopOf="@+id/noAnswerUserTxt"
+        android:src="@drawable/empty_answer"/>
+    <TextView
+        android:id="@+id/noAnswerUserTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You have not given an answer"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/noAnswerUserImg"
+        android:gravity="center"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

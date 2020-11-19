@@ -1,12 +1,16 @@
 package com.tpa.questapp.homefragment.answerpagefragment
 
+import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.tpa.questapp.R
 
 
-class MyPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
+class MyPagerAdapter(fm: FragmentManager, context: Context): FragmentPagerAdapter(fm) {
     // sebuah list yang menampung objek Fragment
+    private var context: Context = context;
+
     private val pages = listOf(
         AnswerTabFragment(),
         QuestionTabFragment()
@@ -24,8 +28,8 @@ class MyPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
     // judul untuk tabs
     override fun getPageTitle(position: Int): CharSequence? {
         return when(position){
-            0 -> "Answer"
-            else -> "Question"
+            0 -> context.resources.getString(R.string.answer)
+            else -> context.resources.getString(R.string.question)
         }
     }
 }

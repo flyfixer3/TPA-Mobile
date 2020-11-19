@@ -49,8 +49,9 @@ class QuestionFormActivity : AppCompatActivity() {
     }
     private fun writeQuestion(userId: String, question: String, topic: String){
         val questionDate = DateFormat.getDateTimeInstance().format(Date())
-        val question = Question(userId, question, topic, questionDate)
-        val questionId = UUID.randomUUID()
+        val questionId = UUID.randomUUID().toString()
+        val question = Question(questionId,userId, question, topic,questionDate)
+
 
         database.child("questions").child(questionId.toString()).setValue(question)
         database.child("users").child(userId).child("questions").child(questionId.toString()).setValue(question)

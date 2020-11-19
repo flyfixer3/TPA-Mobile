@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class Question (
+    var questionId: String? = "",
     var userId: String? = "",
     var question: String? = "",
     var topic: String? = "",
@@ -13,11 +14,13 @@ class Question (
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readString(),
         parcel.readString()
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(questionId)
         parcel.writeString(userId)
         parcel.writeString(question)
         parcel.writeString(topic)

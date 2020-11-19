@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userImgAnswerQuestion"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@mipmap/profile"/>
+        <TextView
+            android:id="@+id/userNameAnswerQuestion"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="username"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/userAnswerQuestion"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="title"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+    <TextView
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/your_answer"
+        android:textColor="@color/colorAccent"/>
+    <TextView
+        android:id="@+id/userAnswer"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Answer"/>
+    <ImageView
+        android:id="@+id/userAnswerImage"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"/>
+
+
+</LinearLayout>

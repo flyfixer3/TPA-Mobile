@@ -15,6 +15,11 @@
         android:text="@string/title_register"
         android:textSize="20sp"/>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/register_pic"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

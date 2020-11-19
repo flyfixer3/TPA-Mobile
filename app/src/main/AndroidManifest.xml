@@ -10,8 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".QuestionDetailActivity"></activity>
-        <activity android:name=".roomdetail.QuestionRoomPostActivity"></activity>
-        <activity android:name=".roomdetail.commentActivity" />
+        <activity android:name=".roomdetail.CommentRoomQuestionActivity"></activity>
+        <activity android:name=".roomdetail.QuestionRoomFormActivity" />
+        <activity android:name=".roomdetail.CommentRoomPostActivity" />
         <activity android:name=".roomdetail.PostRoomFormActivity" />
         <activity android:name=".room.ViewAllRoomActivity" />
         <activity android:name=".roomdetail.RoomMemberActivity" />

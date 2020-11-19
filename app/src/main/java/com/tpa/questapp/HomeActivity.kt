@@ -24,13 +24,13 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun init(){
-        replaceFragment(homeFragment, "Home")
+        replaceFragment(homeFragment, resources.getString(R.string.home))
         bottomNavigation.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.home -> replaceFragment(homeFragment, "Home")
-                R.id.answer -> replaceFragment(answerFragment, "Answer")
-                R.id.discover -> replaceFragment(discoverFragment, "Discover")
-                R.id.profile -> replaceFragment(profileFragment, "Profile")
+                R.id.home -> replaceFragment(homeFragment, resources.getString(R.string.home))
+                R.id.answer -> replaceFragment(answerFragment, getString(R.string.answer))
+                R.id.discover -> replaceFragment(discoverFragment, getString(R.string.discover))
+                R.id.profile -> replaceFragment(profileFragment,getString( R.string.profile))
             }
             true
         }

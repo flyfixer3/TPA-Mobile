@@ -68,11 +68,12 @@ class QuestionDetailActivity : AppCompatActivity(), RecycleViewClickListener {
                 if(snapshot.exists()){
                     for (h in snapshot.children){
                         list.add(Answer(h.key,
+                            h.child("questionId").value.toString(),
                             h.child("userId").value.toString(),
                             h.child("answer").value.toString(),
                             h.child("media").value.toString(),
-                            Integer.parseInt(h.child("upvote").value.toString()),
-                            Integer.parseInt(h.child("downvote").value.toString())
+                            h.child("upvote").value.toString(),
+                            h.child("downvote").value.toString()
                         ))
                     }
                     rv_list_answer.adapter = AnswerQuestionListAdapter(list, this@QuestionDetailActivity)

@@ -5,15 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.FirebaseDatabase.*
 import com.tpa.questapp.R
-import com.tpa.questapp.followfragment.ListFollowAdapter
 import com.tpa.questapp.model.Question
-import com.tpa.questapp.model.User
 import com.tpa.questapp.question.UserQuestionListAdapter
-import kotlinx.android.synthetic.main.fragment_user_follower_tab.view.*
 import kotlinx.android.synthetic.main.fragment_user_question_tab.view.*
 
 class UserQuestionTabFragment : Fragment() {
@@ -34,6 +33,11 @@ class UserQuestionTabFragment : Fragment() {
         questionList = arrayListOf()
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_user_question_tab, container, false)
+        view.userQuestionListView.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
+
+        view.noQuestionUserImg.isVisible = false
+        view.noQuestionUserTxt.isVisible = false
+
         database.addValueEventListener(object : ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
@@ -41,12 +45,14 @@ class UserQuestionTabFragment : Fragment() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 questionList.clear()
-                if(snapshot.exists()){
-                    for (h in snapshot.children){
-                        val question = h.getValue(Question::class.java)
-                        questionList.add(question!!)
-                    }
-                    view.userQuestionListView.adapter = UserQuestionListAdapter(view.context, R.layout.user_question_list, questionList)
+                for (h in snapshot.children){
+                    val question = h.getValue(Question::class.java)
+                    questionList.add(question!!)
+                }
+                view.userQuestionListView.adapter = UserQuestionListAdapter(questionList, view.context)
+                if (questionList.isEmpty()){
+                    view.noQuestionUserImg.isVisible = true
+                    view.noQuestionUserTxt.isVisible = true
                 }
             }
 

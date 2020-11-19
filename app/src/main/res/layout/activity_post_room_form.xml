@@ -47,7 +47,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Post Title">
+            android:hint="@string/post_title">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/roomPostTitleField"
@@ -59,7 +59,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Post Description">
+            android:hint="@string/post_description">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/roomPostDescriptionField"
@@ -74,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:text="Create Post"
+            android:text="@string/create_post"
             android:textColor="@color/colorPrimary"
             android:layout_alignParentBottom="true"
             android:textSize="20sp"/>

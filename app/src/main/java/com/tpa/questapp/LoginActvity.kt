@@ -1,6 +1,8 @@
 package com.tpa.questapp
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -19,11 +21,17 @@ import kotlinx.android.synthetic.main.activity_login_actvity.*
 
 class LoginActvity : AppCompatActivity() {
 
+    val PREFS_NAME = "CurrentUser"
+    val KEY_UID = "key.uid"
+    lateinit var sp: SharedPreferences
+
     lateinit var auth:FirebaseAuth
+
     private lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_actvity)
+        sp = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         init()
     }
 
@@ -81,6 +89,7 @@ class LoginActvity : AppCompatActivity() {
                                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                                     // Get Post object and use the values to update the UI
                                     if (dataSnapshot.exists()) {
+                                        saveUid(auth.uid.toString())
                                         startActivity(
                                             Intent(
                                                 this@LoginActvity,
@@ -119,5 +128,11 @@ class LoginActvity : AppCompatActivity() {
         alert.setMessage(message)
         alert.setPositiveButton("Ok") { dialogInterface, i -> }
         alert.show()
+    }
+
+    private fun saveUid(uid: String){
+        val editor:SharedPreferences.Editor = sp.edit()
+        editor.putString(KEY_UID, uid)
+        editor.apply();
     }
 }

@@ -46,16 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:background="@color/colorPrimaryDark"
-            android:text="follow"
-            android:textColor="@color/colorPrimary"
-            android:textSize="10sp" />
-        <Button
-            android:id="@+id/unfollowDiscoverBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="Follow"
-            android:visibility="invisible"
+            android:text="@string/follow"
             android:textColor="@color/colorPrimary"
             android:textSize="10sp" />
     </LinearLayout>

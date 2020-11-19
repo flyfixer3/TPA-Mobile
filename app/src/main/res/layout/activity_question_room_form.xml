@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".roomdetail.QuestionRoomFormActivity"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="@drawable/backgroundprofile">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#CCFFFFFF"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/roomQuestionFormImg"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginTop="30dp"
+                android:src="@mipmap/profile"/>
+
+            <TextView
+                android:id="@+id/imgQuestionUploadBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp"
+                android:text="@string/upload"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="vertical">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/your_spesific_topic">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/topicRoomField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/your_question">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/questionRoomField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/addQuestionRoomBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/create_question"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimary"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

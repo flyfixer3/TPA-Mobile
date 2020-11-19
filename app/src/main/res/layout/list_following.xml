@@ -4,7 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="#4FF49292"
+    android:layout_marginBottom="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginLeft="8dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userFollowingListImg"
@@ -46,7 +50,7 @@
             android:id="@+id/UnfollowFollowingButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="unfollow"
+            android:text="@string/unfollow"
             android:background="@color/colorPrimaryDark"
             android:textColor="@color/colorPrimary"/>
     </LinearLayout>
