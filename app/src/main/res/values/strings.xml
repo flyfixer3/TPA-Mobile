@@ -135,6 +135,7 @@
     <string name="choose_one_the_topic">Choose One The Topic</string>
     <string name="add_question">Add Question</string>
     <string name="add_post">Add Post</string>
+    <string name="add_answer">Add Answer</string>
     <string name="upload">upload</string>
     <string name="your_spesific_topic">Your Spesific Topic</string>
     <string name="your_question">Your Question</string>
@@ -142,6 +143,9 @@
     <string name="add_comment">Add Comment</string>
     <string name="post_title">Post Title</string>
     <string name="post_description">Post Description</string>
+    <string name="answer_title">Answer Title</string>
+    <string name="answer_description">Answer Description</string>
+    <string name="create_answer">Create Answer</string>
     <string name="create_post">Create Post</string>
     <string name="owners">Owners :</string>
     <string name="follower_this_room">Follower This Room :</string>

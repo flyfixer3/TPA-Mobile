@@ -52,7 +52,7 @@ class AnswerTabFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (j in snapshot.children){
                     val answer: Answer? = j.getValue(Answer::class.java)
-                    Log.d("amnswer",answer!!.userId.toString())
+                    Log.d("answer",answer!!.userId.toString())
                     if (answer.userId.equals(auth.uid.toString())){
                         AnswerList.add(answer)
                     }

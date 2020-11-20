@@ -9,13 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".QuestionDetailActivity"></activity>
-        <activity android:name=".roomdetail.CommentRoomQuestionActivity"></activity>
+        <activity android:name=".QuestionDetailActivity" />
+        <activity android:name=".roomdetail.CommentRoomQuestionActivity" />
         <activity android:name=".roomdetail.QuestionRoomFormActivity" />
         <activity android:name=".roomdetail.CommentRoomPostActivity" />
         <activity android:name=".roomdetail.PostRoomFormActivity" />
         <activity android:name=".room.ViewAllRoomActivity" />
         <activity android:name=".roomdetail.RoomMemberActivity" />
+        <activity android:name=".question.CommentQuestionDetailActivity" />
+        <activity android:name=".question.AnswerQuestionFormActivity" />
         <activity
             android:name=".roomdetail.RoomDetailActivity"
             android:label="@string/title_activity_room_detail"

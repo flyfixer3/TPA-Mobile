@@ -22,13 +22,19 @@ import kotlinx.android.synthetic.main.user_question_list.view.*
 class UserQuestionListAdapter: RecyclerView.Adapter<UserQuestionListAdapter.Companion.Holder>{
     companion object{
         class Holder : RecyclerView.ViewHolder{
-
+            lateinit var userName: TextView
+            lateinit var profileImg: de.hdodenhof.circleimageview.CircleImageView
             lateinit var question: TextView
             lateinit var answerCount: TextView
+            lateinit var question_date: TextView
+
 
             constructor(rv: View) : super(rv){
+                userName = rv.findViewById(R.id.txtUserName) as TextView
+                profileImg = rv.findViewById(R.id.picture_path) as de.hdodenhof.circleimageview.CircleImageView
                 question = rv.findViewById(R.id.questionUserListTxt) as TextView
                 answerCount =rv.findViewById(R.id.countQuestionUserListTxt) as TextView
+                question_date =rv.findViewById(R.id.txt_question_date) as TextView
             }
         }
     }
@@ -59,6 +65,18 @@ class UserQuestionListAdapter: RecyclerView.Adapter<UserQuestionListAdapter.Comp
         database = Firebase.database.reference
         var at: Question = list[position]
         holder.question.setText(at.question)
+        holder.question_date.setText(at.createdDate)
+        database.child("users").child(at.userId.toString()).addValueEventListener(object : ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                Picasso.get().load(snapshot.child("pictProfile").value.toString().trim()).into(holder!!.profileImg)
+                holder.userName.setText(snapshot.child("fullname").value.toString().trim())
+            }
+
+        })
         database.child("questions").child(at.questionId.toString()).child("answers").addValueEventListener(object : ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")

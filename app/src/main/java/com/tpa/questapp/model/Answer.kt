@@ -9,8 +9,9 @@ class Answer (
     var userId: String? = "",
     var answer: String? = "",
     var media: String? = "",
-    var upvote: String? = "",
-    var downvote: String? = ""
+    var upvote: Int? = 0,
+    var downvote: Int? = 0,
+    var createdDate: String? = ""
 ):Parcelable{
     constructor(parcel: Parcel): this(
         parcel.readString(),
@@ -18,7 +19,8 @@ class Answer (
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString(),
+        parcel.readInt(),
+        parcel.readInt(),
         parcel.readString()
     ){
     }
@@ -29,8 +31,9 @@ class Answer (
         parcel.writeString(userId)
         parcel.writeString(answer)
         parcel.writeString(media)
-        parcel.writeString(upvote)
-        parcel.writeString(downvote)
+        parcel.writeInt(upvote!!)
+        parcel.writeInt(downvote!!)
+        parcel.writeString(createdDate)
     }
 
     override fun describeContents(): Int {

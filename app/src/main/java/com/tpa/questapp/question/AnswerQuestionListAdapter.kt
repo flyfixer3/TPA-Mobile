@@ -1,10 +1,12 @@
 package com.tpa.questapp.question
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -18,6 +20,8 @@ import com.squareup.picasso.Picasso
 import com.tpa.questapp.R
 import com.tpa.questapp.model.Answer
 import com.tpa.questapp.model.Ticket
+import com.tpa.questapp.roomdetail.CommentRoomQuestionActivity
+import com.tpa.questapp.roomdetail.QuestionRoomFormActivity
 
 class AnswerQuestionListAdapter : RecyclerView.Adapter<AnswerQuestionListAdapter.Companion.Holder>{
     private lateinit var database: DatabaseReference
@@ -30,10 +34,12 @@ class AnswerQuestionListAdapter : RecyclerView.Adapter<AnswerQuestionListAdapter
             lateinit var upvote: TextView
             lateinit var downvote: TextView
             lateinit var followBtn: Button
-            lateinit var answerContainer: LinearLayout
+            lateinit var answerContainer: RelativeLayout
             lateinit var upvoteBtn: ImageButton
             lateinit var downvoteBtn: ImageButton
             lateinit var media: ImageView
+            lateinit var commentCountAnswer: TextView
+            lateinit var addComment: TextView
 
             constructor(rv: View) : super(rv){
                 userName = rv.findViewById(R.id.txtUserName) as TextView
@@ -44,8 +50,10 @@ class AnswerQuestionListAdapter : RecyclerView.Adapter<AnswerQuestionListAdapter
                 upvoteBtn = rv.findViewById(R.id.iv_upvote) as ImageButton
                 downvoteBtn = rv.findViewById(R.id.iv_downvote) as ImageButton
                 followBtn = rv.findViewById(R.id.followHomeBtn) as Button
-                answerContainer = rv.findViewById(R.id.answerContainer) as LinearLayout
+                answerContainer = rv.findViewById(R.id.answerContainer) as RelativeLayout
                 media = rv.findViewById(R.id.imageContainer) as ImageView
+                commentCountAnswer = rv.findViewById(R.id.commentCount) as TextView
+                addComment = rv.findViewById(R.id.addCommentAnswer) as TextView
             }
         }
     }
@@ -83,6 +91,22 @@ class AnswerQuestionListAdapter : RecyclerView.Adapter<AnswerQuestionListAdapter
                 holder.userName.setText(snapshot.child("fullname").value.toString().trim())
             }
         })
+        database.child("answer").child(at.answerId.toString()).addValueEventListener( object : ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                holder.commentCountAnswer.setText(snapshot.child("comments").childrenCount.toString())
+            }
+
+        })
+        holder.commentCountAnswer.setText("0")
+        holder.addComment.setOnClickListener {
+            val intent = Intent(con, CommentQuestionDetailActivity::class.java)
+            intent.putExtra("answerId", at.answerId)
+            con.startActivity(intent)
+        }
         Picasso.get().load(at.media.toString()).into(holder!!.media)
         holder.answer.setText(at.answer)
         holder.downvote.setText(at.downvote.toString())
@@ -102,6 +126,14 @@ class AnswerQuestionListAdapter : RecyclerView.Adapter<AnswerQuestionListAdapter
                 database.child("users").child(auth.uid.toString()).child("following").child(at.userId.toString()).removeValue()
                 database.child("users").child(at.userId.toString()).child("followers").child(auth.uid.toString()).removeValue()
             }
+        }
+        holder.upvoteBtn.setOnClickListener{
+            database.child("answer").child(at.answerId.toString()).child("upvote").setValue(at.upvote!!.plus(1))
+            database.child("questions").child(at.questionId.toString()).child("answers").child(at.answerId.toString()).child("upvote").setValue(at.upvote!!.plus(1))
+        }
+        holder.downvoteBtn.setOnClickListener{
+            database.child("answer").child(at.answerId.toString()).child("downvote").setValue(at.downvote!!.plus(1))
+            database.child("questions").child(at.questionId.toString()).child("answers").child(at.answerId.toString()).child("downvote").setValue(at.downvote!!.plus(1))
         }
     }
 
